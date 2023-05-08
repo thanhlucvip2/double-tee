@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "humao.rest-client",
+    "adam-bender.commit-message-editor",
+    "mikestead.dotenv",
+    "christian-kohler.npm-intellisense",
+    "redhat.vscode-yaml",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "cobaltblu27.rainbow-highlighter",
+    "streetsidesoftware.code-spell-checker",
+    "EditorConfig.EditorConfig",
+    "pmneo.tsimporter",
+    "wix.vscode-import-cost",
+    "shardulm94.trailing-spaces",
+    "redhat.vscode-yaml",
+  ]
+}
