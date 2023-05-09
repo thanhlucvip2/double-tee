@@ -8,20 +8,21 @@ export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const response: Response = context.switchToHttp().getResponse();
-    const token = request.cookies['jwt'];
-    // check xem trong header request có authorization chưa
-    if (!token) {
-      throw new HttpException('UNAUTHORIZED', HttpStatus.UNAUTHORIZED);
+    if (!request.headers.authorization) {
+      throw new HttpException('Invalid Authorization', HttpStatus.BAD_REQUEST);
     }
 
-    // check token
-    // gắn user vào cho requests
-    request.userId = await this.validateToken(token, response);
+    request.userId = await this.validateToken(request.headers.authorization);
 
     return true;
   }
-  async validateToken(token: string, response: Response) {
+  async validateToken(auth: string) {
+    if (auth.split(' ')[0] !== 'Bearer') {
+      // format Token : Bearer ...token
+      // báo token không hợp lệ
+      throw new HttpException('Invalid token', HttpStatus.FORBIDDEN);
+    }
+    const token = auth.split(' ')[1];
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.SECRET,
@@ -29,8 +30,6 @@ export class AuthGuard implements CanActivate {
 
       return payload.id;
     } catch (err) {
-      response.clearCookie('jwt');
-      response.clearCookie('isLogin');
       throw new HttpException('Token hết hạn', HttpStatus.UNAUTHORIZED);
     }
   }
