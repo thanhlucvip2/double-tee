@@ -2,7 +2,6 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 //TODO : kiểm tra xem người dùng đã đăng nhập chưa để cho phép requests hay không
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
@@ -12,7 +11,7 @@ export class AuthGuard implements CanActivate {
       throw new HttpException('Invalid Authorization', HttpStatus.BAD_REQUEST);
     }
 
-    request.userId = await this.validateToken(request.headers.authorization);
+    request.user = await this.validateToken(request.headers.authorization);
 
     return true;
   }
@@ -28,7 +27,7 @@ export class AuthGuard implements CanActivate {
         secret: process.env.SECRET,
       });
 
-      return payload.id;
+      return payload;
     } catch (err) {
       throw new HttpException('Token hết hạn', HttpStatus.UNAUTHORIZED);
     }
