@@ -6,6 +6,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/systems/http-error.filter';
 import { UserModule } from '@/user/user.module';
 import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
+import { ReceiveModule } from '@/apis/receive/receive.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -17,6 +18,7 @@ import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
     }),
     UserModule,
     ProductsTypeModule,
+    ReceiveModule,
   ],
   providers: [
     {
