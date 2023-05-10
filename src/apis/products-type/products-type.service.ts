@@ -10,11 +10,11 @@ import { PaginationDto } from '@/shared/pagination.dto';
 export class ProductsTypeService {
   constructor(
     @InjectRepository(ProductsTypeEntity)
-    private readonly productRepository: Repository<ProductsTypeEntity>,
+    private readonly productTypeRepository: Repository<ProductsTypeEntity>,
     private entityManager: EntityManager,
   ) {}
   async create(createProductsTypeDto: CreateProductsTypeDto) {
-    const sku = await this.productRepository.findOne({
+    const sku = await this.productTypeRepository.findOne({
       where: { sku: createProductsTypeDto.sku },
     });
     if (sku) {
@@ -23,9 +23,9 @@ export class ProductsTypeService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    const newProduct = this.productRepository.create(createProductsTypeDto);
+    const newProduct = this.productTypeRepository.create(createProductsTypeDto);
 
-    return await this.productRepository.save(newProduct);
+    return await this.productTypeRepository.save(newProduct);
   }
 
   async findAll(pagination: PaginationDto) {
@@ -57,7 +57,7 @@ export class ProductsTypeService {
   }
 
   async findOne(id: string) {
-    const productType = await this.productRepository.findOne({
+    const productType = await this.productTypeRepository.findOne({
       where: { id },
     });
     if (!productType) {
@@ -69,12 +69,28 @@ export class ProductsTypeService {
     return productType;
   }
 
-  update(id: string, updateProductsTypeDto: UpdateProductsTypeDto) {
-    return `This action updates a #${id} productsType`;
+  async update(id: string, updateProductsTypeDto: UpdateProductsTypeDto) {
+    const product = await this.productTypeRepository.findOne({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new HttpException(
+        'Sản phẩm không tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    await this.productTypeRepository.update({ id }, updateProductsTypeDto);
+
+    const newProductResult = await this.productTypeRepository.findOne({
+      where: { id },
+    });
+    return newProductResult;
   }
 
   async remove(id: string) {
-    const productType = await this.productRepository.findOne({
+    const productType = await this.productTypeRepository.findOne({
       where: { id },
     });
     if (!productType) {
@@ -83,7 +99,7 @@ export class ProductsTypeService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    await this.productRepository.delete({ id });
+    await this.productTypeRepository.delete({ id });
     return {
       message: 'Xóa loại hàng thành công!',
     };

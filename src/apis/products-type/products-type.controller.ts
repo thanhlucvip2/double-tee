@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
   Query,
@@ -38,7 +38,7 @@ export class ProductsTypeController {
     return this.productsTypeService.findAll(pagination);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @UseGuards(AuthGuard, AdminRoleGuard)
   update(
     @Param('id') id: string,

@@ -8,9 +8,6 @@ export class ProductsTypeEntity extends BaseEntity {
   @Column({ type: 'text', nullable: false })
   color: string;
 
-  @Column({ type: 'varchar', length: 1, nullable: false })
-  size: string;
-
   @Column({ type: 'varchar', length: 20, nullable: false })
   sku: string;
 }
