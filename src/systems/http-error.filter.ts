@@ -19,13 +19,18 @@ export class HttpErrorFilter implements ExceptionFilter {
     const status = exception.getStatus
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR; // response sẽ trả về 404
-
+    const getResponseMessage = exception.getResponse();
+    let message = getResponseMessage;
+    if (typeof getResponseMessage === 'object') {
+      message = getResponseMessage['message'];
+    }
+    // console.log(exception.message);
     // tạo status khi có response lỗi
     const errResponse = {
       code: status, // status (404)
       timeRes: new Date(), // time error
       method: requests.method, // method POST / PUT / GET / DELETE
-      message: exception.message || null, // message
+      message: message || null, // message
       data: null,
       status: HTTP_STATUS_MESSAGE[status],
     };
