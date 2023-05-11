@@ -16,6 +16,9 @@ export class ReceiveEntity extends BaseEntity {
   @Column({ type: 'int', nullable: false })
   total_price: number;
 
-  @ManyToOne(() => ProductsTypeEntity, (products_type) => products_type.receive)
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  sku: string;
+
+  @ManyToOne(() => ProductsTypeEntity, (product_type) => product_type.receive)
   products_type: ProductsTypeEntity;
 }

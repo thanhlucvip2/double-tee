@@ -20,14 +20,14 @@ export class ReceiveController {
     return this.receiveService.create(createReceiveDto);
   }
 
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.receiveService.findOne(id);
+  }
+
   @Get()
   findAll() {
     return this.receiveService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.receiveService.findOne(+id);
   }
 
   @Patch(':id')

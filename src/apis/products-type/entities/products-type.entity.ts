@@ -9,13 +9,9 @@ export class ProductsTypeEntity extends BaseEntity {
   @Column({ type: 'text', nullable: false })
   color: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 20, nullable: false, unique: true })
   sku: string;
 
-  @OneToMany(() => ReceiveEntity, (receive) => receive.products_type, {
-    nullable: true,
-    onUpdate: 'NO ACTION',
-    onDelete: 'NO ACTION',
-  })
+  @OneToMany((type) => ReceiveEntity, (receive) => receive.products_type)
   receive: ReceiveEntity[];
 }

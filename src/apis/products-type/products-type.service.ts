@@ -23,7 +23,9 @@ export class ProductsTypeService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    const newProduct = this.productTypeRepository.create(createProductsTypeDto);
+    const newProduct = await this.productTypeRepository.create(
+      createProductsTypeDto,
+    );
 
     return await this.productTypeRepository.save(newProduct);
   }
@@ -59,6 +61,7 @@ export class ProductsTypeService {
   async findOne(id: string) {
     const productType = await this.productTypeRepository.findOne({
       where: { id },
+      relations: ['receive'],
     });
     if (!productType) {
       throw new HttpException(
