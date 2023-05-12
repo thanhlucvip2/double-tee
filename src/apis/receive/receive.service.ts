@@ -57,8 +57,43 @@ export class ReceiveService {
     return `This action returns all receive`;
   }
 
-  update(id: number, updateReceiveDto: UpdateReceiveDto) {
-    return `This action updates a #${id} receive`;
+  async update(id: string, updateReceiveDto: UpdateReceiveDto) {
+    const receive = await this.receiveRepository.findOne({
+      where: { id },
+    });
+
+    if (!receive) {
+      throw new HttpException(
+        'Đơn nhập hàng không tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const products_type = await this.productTypeRepository.findOne({
+      where: { sku: updateReceiveDto.sku },
+    });
+
+    if (!products_type) {
+      throw new HttpException(
+        'Mã hàng không tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    await this.receiveRepository.update(
+      { id },
+      {
+        fee_shipping: updateReceiveDto.fee_shipping,
+        quantity: updateReceiveDto.quantity,
+        note: updateReceiveDto.note,
+        total_price: updateReceiveDto.total_price,
+        sku: updateReceiveDto.sku,
+        products_type,
+      },
+    );
+    return await this.productTypeRepository.findOne({
+      where: { sku: updateReceiveDto.sku },
+      relations: ['products_type'],
+    });
   }
 
   remove(id: number) {
