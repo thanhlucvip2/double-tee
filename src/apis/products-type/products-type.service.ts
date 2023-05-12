@@ -45,7 +45,6 @@ export class ProductsTypeService {
 
     const queryBuilder = await this.entityManager
       .createQueryBuilder(ProductsTypeEntity, 'products_type')
-      .leftJoinAndSelect('products_type.receive', 'receive') // relation ship
       // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
       // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
       .orderBy({ 'products_type.createAt': 'ASC' })
