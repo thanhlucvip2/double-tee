@@ -90,14 +90,29 @@ export class ReceiveService {
         products_type,
       },
     );
-    return await this.productTypeRepository.findOne({
-      where: { sku: updateReceiveDto.sku },
+
+    return await this.receiveRepository.findOne({
+      where: { id },
       relations: ['products_type'],
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} receive`;
+  async remove(id: string) {
+    const receive: ReceiveEntity = await this.receiveRepository.findOne({
+      where: { id },
+    });
+
+    if (!receive) {
+      throw new HttpException(
+        'Mã đơn nhập hàng không tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    await this.receiveRepository.delete({ id });
+
+    return {
+      message: 'Xóa đơn hàng thành công',
+    };
   }
 }
 

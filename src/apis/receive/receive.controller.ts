@@ -45,6 +45,6 @@ export class ReceiveController {
   @Delete(':id')
   @UseGuards(AuthGuard, AdminRoleGuard)
   remove(@Param('id') id: string) {
-    return this.receiveService.remove(+id);
+    return this.receiveService.remove(id);
   }
 }

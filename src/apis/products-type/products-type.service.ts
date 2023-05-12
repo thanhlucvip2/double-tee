@@ -13,6 +13,7 @@ export class ProductsTypeService {
     private readonly productTypeRepository: Repository<ProductsTypeEntity>,
     private entityManager: EntityManager,
   ) {}
+
   async create(createProductsTypeDto: CreateProductsTypeDto) {
     const sku = await this.productTypeRepository.findOne({
       where: { sku: createProductsTypeDto.sku },
