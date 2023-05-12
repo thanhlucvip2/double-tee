@@ -9,6 +9,7 @@ import { UserInfoDto } from './dto/user-info.dto';
 import { AuthGuard } from '@/guard/auth.guard';
 import { AdminRoleGuard } from '@/guard/admin_role.guard';
 import { UserIdDecorator } from './user.decorator';
+import { PaginationDto } from '@/shared/pagination.dto';
 
 @Controller('user')
 export class UserController {
@@ -38,7 +39,7 @@ export class UserController {
 
   @Get('/all-user')
   @UseGuards(AuthGuard, AdminRoleGuard)
-  async getAllUser(): Promise<UserInfoDto[]> {
-    return this.userService.getAllUser();
+  async getAllUser(@Query() pagination: PaginationDto) {
+    return this.userService.getAllUser(pagination);
   }
 }
