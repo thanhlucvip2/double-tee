@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { ProductsTypeEntity } from './entities/products-type.entity';
 import { PaginationDto } from '@/shared/pagination.dto';
+import { ResponsePagination } from '@/shared/response.pagination';
 
 @Injectable()
 export class ProductsTypeService {
@@ -43,20 +44,23 @@ export class ProductsTypeService {
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
 
     const queryBuilder = await this.entityManager
-      .createQueryBuilder(ProductsTypeEntity, 'product')
+      .createQueryBuilder(ProductsTypeEntity, 'products_type')
+      .leftJoinAndSelect('products_type.receive', 'receive') // relation ship
+      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
+      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
+      .orderBy({ 'products_type.createAt': 'ASC' })
       .limit(pageSize)
-      .offset(pageIndex);
-    // .andWhere('product.created >= :sqlFromDate', { sqlFromDate })
-    // .andWhere('product.created <= :sqlToDate', { sqlToDate })
+      .offset(pageIndex * pageSize);
 
     const total = await queryBuilder.getCount();
     const items = await queryBuilder.getMany();
-    return {
+    const result = new ResponsePagination<ProductsTypeEntity>({
       pageIndex,
       pageSize,
       total,
       items,
-    };
+    });
+    return result;
   }
 
   async findOne(id: string) {

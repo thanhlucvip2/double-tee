@@ -1,15 +1,18 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 
 import { CreateReceiveDto } from './dto/create-receive.dto';
 import { UpdateReceiveDto } from './dto/update-receive.dto';
 import { ProductsTypeEntity } from '../products-type/entities/products-type.entity';
 import { ReceiveEntity } from './entities/receive.entity';
+import { PaginationDto } from '@/shared/pagination.dto';
+import { ResponsePagination } from '@/shared/response.pagination';
 
 @Injectable()
 export class ReceiveService {
   constructor(
+    private entityManager: EntityManager,
     @InjectRepository(ProductsTypeEntity)
     private readonly productTypeRepository: Repository<ProductsTypeEntity>,
     @InjectRepository(ReceiveEntity)
@@ -53,8 +56,35 @@ export class ReceiveService {
     return receive;
   }
 
-  findAll() {
-    return `This action returns all receive`;
+  async findAll(pagination: PaginationDto) {
+    const {
+      // fromDate = new Date(),
+      // toDate = new Date(),
+      pageIndex = 0,
+      pageSize = 10,
+    } = pagination;
+
+    // const sqlFromDate = convertDateTimeToDateString(fromDate);
+    // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
+
+    const queryBuilder = await this.entityManager
+      .createQueryBuilder(ReceiveEntity, 'receive')
+      .leftJoinAndSelect('receive.products_type', 'products_type') // relation ship
+      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
+      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
+      .orderBy({ 'receive.quantity': 'ASC' })
+      .limit(pageSize)
+      .offset(pageIndex * pageSize);
+
+    const total = await queryBuilder.getCount();
+    const items = await queryBuilder.getMany();
+    const result = new ResponsePagination<ReceiveEntity>({
+      pageIndex,
+      pageSize,
+      total,
+      items,
+    });
+    return result;
   }
 
   async update(id: string, updateReceiveDto: UpdateReceiveDto) {

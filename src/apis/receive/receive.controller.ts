@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ReceiveService } from './receive.service';
 import { CreateReceiveDto } from './dto/create-receive.dto';
 import { UpdateReceiveDto } from './dto/update-receive.dto';
 import { AdminRoleGuard } from '@/guard/admin_role.guard';
 import { AuthGuard } from '@/guard/auth.guard';
+import { PaginationDto } from '@/shared/pagination.dto';
 
 @Controller('receive')
 export class ReceiveController {
@@ -32,8 +34,8 @@ export class ReceiveController {
 
   @Get()
   @UseGuards(AuthGuard, AdminRoleGuard)
-  findAll() {
-    return this.receiveService.findAll();
+  findAll(@Query() pagination: PaginationDto) {
+    return this.receiveService.findAll(pagination);
   }
 
   @Put(':id')
