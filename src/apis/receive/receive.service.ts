@@ -36,6 +36,7 @@ export class ReceiveService {
       note: createReceiveDto.note,
       total_price: createReceiveDto.total_price,
       sku: createReceiveDto.sku,
+
       products_type,
     });
     await this.receiveRepository.save(receive);
@@ -79,11 +80,12 @@ export class ReceiveService {
     const total = await queryBuilder.getCount();
     const items = await queryBuilder.getMany();
     const result = new ResponsePagination<ReceiveEntity>({
-      pageIndex,
-      pageSize,
+      pageIndex: +pageIndex,
+      pageSize: +pageSize,
       total,
       items,
     });
+
     return result;
   }
 

@@ -54,8 +54,8 @@ export class ProductsTypeService {
     const total = await queryBuilder.getCount();
     const items = await queryBuilder.getMany();
     const result = new ResponsePagination<ProductsTypeEntity>({
-      pageIndex,
-      pageSize,
+      pageIndex: +pageIndex,
+      pageSize: +pageSize,
       total,
       items,
     });

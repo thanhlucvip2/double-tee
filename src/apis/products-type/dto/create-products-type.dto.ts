@@ -12,5 +12,8 @@ export class CreateProductsTypeDto {
   @IsNotEmpty()
   color: string;
 
+  @IsNotEmpty()
+  name: string;
+
   note?: string;
 }

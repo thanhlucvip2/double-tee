@@ -7,5 +7,8 @@ export class UpdateProductsTypeDto {
   @IsNotEmpty()
   color: string;
 
+  @IsNotEmpty()
+  name: string;
+
   note?: string;
 }
