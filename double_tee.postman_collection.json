@@ -1,0 +1,608 @@
+{
+	"info": {
+		"_postman_id": "83084a06-8d2d-4916-b963-8c0e2a891831",
+		"name": "double_tee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27054020"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "doanthanhluc91bvh@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "doanthanhluc91bvh@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "ddasdsa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resendCode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/user/resend-code?email=doanthanhluc91bvh@gmail.com",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"resend-code"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "doanthanhluc91bvh@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "veryCode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/user/very-code?email=doanthanhluc91bvh@gmail.com&code=603660",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"very-code"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "doanthanhluc91bvh@gmail.com"
+								},
+								{
+									"key": "code",
+									"value": "603660"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] getAllUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvYW50aGFuaGx1YzkxYnZoQGdtYWlsLmNvbSIsImlkIjoiYTM2YmY2OGQtMzdmOS00Y2U3LWJhNmEtN2ZjZDhhZGI3YzY5IiwibmFtZSI6ImRkYXNkc2EiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY4MzYzMjI3MiwiZXhwIjoxNjgzNzE4NjcyfQ.oVoYXWGU6uhSO3VUxB3iSEAc3M22hHLutZU7-2s7pFQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/user/all-user?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"all-user"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvYW50aGFuaGx1YzkxYnZoQGdtYWlsLmNvbSIsImlkIjoiYTM2YmY2OGQtMzdmOS00Y2U3LWJhNmEtN2ZjZDhhZGI3YzY5IiwibmFtZSI6ImRkYXNkc2EiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY4MzYzMjI3MiwiZXhwIjoxNjgzNzE4NjcyfQ.oVoYXWGU6uhSO3VUxB3iSEAc3M22hHLutZU7-2s7pFQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/user/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product-types",
+			"item": [
+				{
+					"name": "[ADMIN] create-products-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sku",
+									"value": "16",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "X",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "dasdsa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/products-type",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-products-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products-type/?pageSize=10&pageIndex=0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type",
+								""
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] create-products-type Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": \"dasdsadasdasdas\",\r\n    \"name\": \"áo thun\",\r\n    \"color\": \"dasdsa\",\r\n    \"sku\": \"asdfa\",\r\n    \"size\": \"X\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products-type",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-one-products-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products-type/0a30447e-301e-4c4e-8183-8a86e919e456",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type",
+								"0a30447e-301e-4c4e-8183-8a86e919e456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] remove-products-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products-type/001fa5ae-bb42-458a-9522-c8ce7576ba7c",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type",
+								"001fa5ae-bb42-458a-9522-c8ce7576ba7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] update-products-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sku",
+									"value": "dsasd",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "đỏ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/products-type/d8b3fe9e-b8af-4131-ba54-9c6e2c506d62",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products-type",
+								"d8b3fe9e-b8af-4131-ba54-9c6e2c506d62"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "receive",
+			"item": [
+				{
+					"name": "[ADMIN] create-receive",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "fee_shipping",
+									"value": "100000",
+									"type": "text"
+								},
+								{
+									"key": "total_price",
+									"value": "1231",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "dasdasdasdaddasdsa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/receive",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"receive"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": " [ADMIN] get-one-receive",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/receive/dde419a9-341c-4a18-8019-66d1e48e9683",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"receive",
+								"dde419a9-341c-4a18-8019-66d1e48e9683"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] get-all-receives",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/receive?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"receive"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] update-receive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "quantity",
+									"value": "3123213",
+									"type": "text"
+								},
+								{
+									"key": "fee_shipping",
+									"value": "31312",
+									"type": "text"
+								},
+								{
+									"key": "total_price",
+									"value": "3123",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "dsasd",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "dasdsadadas",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/receive/dde419a9-341c-4a18-8019-66d1e48e9683",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"receive",
+								"dde419a9-341c-4a18-8019-66d1e48e9683"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
