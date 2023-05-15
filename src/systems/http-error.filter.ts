@@ -19,7 +19,9 @@ export class HttpErrorFilter implements ExceptionFilter {
     const status = exception.getStatus
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR; // response sẽ trả về 404
-    const getResponseMessage = exception.getResponse();
+    const getResponseMessage = exception.getResponse
+      ? exception.getResponse()
+      : exception.message;
     let message = getResponseMessage;
     if (typeof getResponseMessage === 'object') {
       message = getResponseMessage['message'];

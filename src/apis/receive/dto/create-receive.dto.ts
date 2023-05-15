@@ -1,1 +1,18 @@
-export class CreateReceiveDto {}
+import { IsNotEmpty, Length } from 'class-validator';
+
+export class CreateReceiveDto {
+  @IsNotEmpty()
+  quantity: number;
+
+  @IsNotEmpty()
+  fee_shipping: number;
+
+  @IsNotEmpty()
+  total_price: number;
+
+  @IsNotEmpty()
+  @Length(1, 20)
+  sku: string;
+
+  note?: string;
+}

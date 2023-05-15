@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { ProductsTypeEntity } from './entities/products-type.entity';
 import { PaginationDto } from '@/shared/pagination.dto';
+import { ResponsePagination } from '@/shared/response.pagination';
 
 @Injectable()
 export class ProductsTypeService {
@@ -13,6 +14,7 @@ export class ProductsTypeService {
     private readonly productTypeRepository: Repository<ProductsTypeEntity>,
     private entityManager: EntityManager,
   ) {}
+
   async create(createProductsTypeDto: CreateProductsTypeDto) {
     const sku = await this.productTypeRepository.findOne({
       where: { sku: createProductsTypeDto.sku },
@@ -23,7 +25,9 @@ export class ProductsTypeService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    const newProduct = this.productTypeRepository.create(createProductsTypeDto);
+    const newProduct = await this.productTypeRepository.create(
+      createProductsTypeDto,
+    );
 
     return await this.productTypeRepository.save(newProduct);
   }
@@ -40,25 +44,28 @@ export class ProductsTypeService {
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
 
     const queryBuilder = await this.entityManager
-      .createQueryBuilder(ProductsTypeEntity, 'product')
+      .createQueryBuilder(ProductsTypeEntity, 'products_type')
+      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
+      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
+      .orderBy({ 'products_type.createAt': 'ASC' })
       .limit(pageSize)
-      .offset(pageIndex);
-    // .andWhere('product.created >= :sqlFromDate', { sqlFromDate })
-    // .andWhere('product.created <= :sqlToDate', { sqlToDate })
+      .offset(pageIndex * pageSize);
 
     const total = await queryBuilder.getCount();
     const items = await queryBuilder.getMany();
-    return {
-      pageIndex,
-      pageSize,
+    const result = new ResponsePagination<ProductsTypeEntity>({
+      pageIndex: +pageIndex,
+      pageSize: +pageSize,
       total,
       items,
-    };
+    });
+    return result;
   }
 
   async findOne(id: string) {
     const productType = await this.productTypeRepository.findOne({
       where: { id },
+      relations: ['receive'],
     });
     if (!productType) {
       throw new HttpException(

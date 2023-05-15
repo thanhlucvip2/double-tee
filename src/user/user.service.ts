@@ -2,7 +2,7 @@ import { UserInfoDto } from './dto/user-info.dto';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import {
   CreateUserDto,
   ResendCodeDto,
@@ -15,6 +15,8 @@ import { JwtService } from '@nestjs/jwt';
 
 import { MailerService } from '@nestjs-modules/mailer';
 import { USER_STATUS } from '@/constants/constants_user-status';
+import { PaginationDto } from '@/shared/pagination.dto';
+import { ResponsePagination } from '@/shared/response.pagination';
 
 @Injectable()
 export class UserService {
@@ -23,6 +25,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
     private jwtService: JwtService,
     private readonly mailservice: MailerService,
+    private entityManager: EntityManager,
   ) {}
 
   async register(newUser: CreateUserDto): Promise<{ message: string }> {
@@ -198,16 +201,44 @@ export class UserService {
     }
   }
 
-  async getAllUser(): Promise<UserInfoDto[]> {
-    const user = await this.userRepository.find();
-    const allUser = user.map((item) => ({
-      email: item.email,
-      id: item.id,
-      name: item.name,
-      createAt: item.createAt,
-      updateAt: item.updateAt,
-      userStatus: item.userStatus,
-    }));
-    return allUser;
+  async getAllUser(pagination: PaginationDto) {
+    // const user = await this.userRepository.find();
+    // const allUser = user.map((item) => ({
+    //   email: item.email,
+    //   id: item.id,
+    //   name: item.name,
+    //   createAt: item.createAt,
+    //   updateAt: item.updateAt,
+    //   userStatus: item.userStatus,
+    // }));
+    // return allUser;
+    const {
+      // fromDate = new Date(),
+      // toDate = new Date(),
+      pageIndex = 0,
+      pageSize = 10,
+    } = pagination;
+
+    // const sqlFromDate = convertDateTimeToDateString(fromDate);
+    // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
+
+    const queryBuilder = await this.entityManager
+      .createQueryBuilder(UserEntity, 'user')
+      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
+      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
+      .orderBy({ 'user.createAt': 'ASC' })
+      .limit(pageSize)
+      .offset(pageIndex * pageSize);
+
+    const total = await queryBuilder.getCount();
+    const items = await queryBuilder.getMany();
+    const result = new ResponsePagination<UserEntity>({
+      pageIndex,
+      pageSize,
+      total,
+      items,
+    });
+
+    return result;
   }
 }

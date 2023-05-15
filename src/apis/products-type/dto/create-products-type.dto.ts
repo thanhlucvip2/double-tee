@@ -6,11 +6,14 @@ export class CreateProductsTypeDto {
   sku: string;
 
   @IsNotEmpty()
-  @Length(1, 1)
+  @Length(1, 5)
   size: string;
 
   @IsNotEmpty()
   color: string;
+
+  @IsNotEmpty()
+  name: string;
 
   note?: string;
 }
