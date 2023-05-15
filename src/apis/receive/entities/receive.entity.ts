@@ -1,6 +1,7 @@
 import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
+import { RECEIVE_STATUS } from '@/constants/receive-status';
 import { BaseEntity } from '@/systems/base.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('tb_receive')
 export class ReceiveEntity extends BaseEntity {
@@ -18,6 +19,13 @@ export class ReceiveEntity extends BaseEntity {
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   sku: string;
+
+  @Column({
+    type: 'varchar',
+    default: RECEIVE_STATUS.CREATE,
+    nullable: true,
+  })
+  status: string;
 
   @ManyToOne(() => ProductsTypeEntity, (product_type) => product_type.receive)
   products_type: ProductsTypeEntity;

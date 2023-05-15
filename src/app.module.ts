@@ -7,6 +7,7 @@ import { HttpErrorFilter } from '@/systems/http-error.filter';
 import { UserModule } from '@/user/user.module';
 import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
 import { ReceiveModule } from '@/apis/receive/receive.module';
+import { InventoryModule } from '@/apis/inventory/inventory.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -19,6 +20,7 @@ import { ReceiveModule } from '@/apis/receive/receive.module';
     UserModule,
     ProductsTypeModule,
     ReceiveModule,
+    InventoryModule,
   ],
   providers: [
     {

@@ -20,4 +20,7 @@ export class ProductsTypeEntity extends BaseEntity {
 
   @OneToMany((type) => ReceiveEntity, (receive) => receive.products_type)
   receive: ReceiveEntity[];
+
+  @OneToMany((type) => ReceiveEntity, (receive) => receive.products_type)
+  inventory: ReceiveEntity[];
 }

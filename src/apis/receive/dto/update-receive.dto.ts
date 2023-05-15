@@ -15,4 +15,6 @@ export class UpdateReceiveDto {
   sku: string;
 
   note?: string;
+
+  status?: string;
 }
