@@ -14,7 +14,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 import { MailerService } from '@nestjs-modules/mailer';
-import { USER_STATUS } from '@/constants/user-status';
+import { USER_STATUS } from '@/constants/constants_user-status';
 import { PaginationDto } from '@/shared/pagination.dto';
 import { ResponsePagination } from '@/shared/response.pagination';
 

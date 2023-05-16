@@ -12,6 +12,16 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -50,6 +60,16 @@
 				{
 					"name": "register",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -115,7 +135,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/user/very-code?email=doanthanhluc91bvh@gmail.com&code=603660",
+							"raw": "{{baseURL}}/user/very-code?email=doanthanhluc91bvh@gmail.com&code=390106",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -130,7 +150,7 @@
 								},
 								{
 									"key": "code",
-									"value": "603660"
+									"value": "390106"
 								}
 							]
 						}
@@ -230,17 +250,17 @@
 							"urlencoded": [
 								{
 									"key": "sku",
-									"value": "16",
-									"type": "text"
-								},
-								{
-									"key": "size",
-									"value": "X",
+									"value": "16a",
 									"type": "text"
 								},
 								{
 									"key": "color",
-									"value": "dasdsa",
+									"value": "đen",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "áo thun",
 									"type": "text"
 								}
 							]
@@ -296,42 +316,6 @@
 					"response": []
 				},
 				{
-					"name": "[ADMIN] create-products-type Copy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"note\": \"dasdsadasdasdas\",\r\n    \"name\": \"áo thun\",\r\n    \"color\": \"dasdsa\",\r\n    \"sku\": \"asdfa\",\r\n    \"size\": \"X\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/products-type",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"products-type"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get-one-products-type",
 					"request": {
 						"auth": {
@@ -347,13 +331,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/0a30447e-301e-4c4e-8183-8a86e919e456",
+							"raw": "{{baseURL}}/products-type/0b888858-387d-4bc7-9cdf-921d74d9da2c",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"0a30447e-301e-4c4e-8183-8a86e919e456"
+								"0b888858-387d-4bc7-9cdf-921d74d9da2c"
 							]
 						}
 					},
@@ -375,13 +359,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/001fa5ae-bb42-458a-9522-c8ce7576ba7c",
+							"raw": "{{baseURL}}/products-type/364f75b2-3888-4926-88f4-0f169a2a73ea",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"001fa5ae-bb42-458a-9522-c8ce7576ba7c"
+								"364f75b2-3888-4926-88f4-0f169a2a73ea"
 							]
 						}
 					},
@@ -406,25 +390,25 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "sku",
-									"value": "dsasd",
+									"key": "name",
+									"value": "a",
 									"type": "text"
 								},
 								{
-									"key": "color",
-									"value": "đỏ",
+									"key": "note",
+									"value": "a",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/products-type/d8b3fe9e-b8af-4131-ba54-9c6e2c506d62",
+							"raw": "{{baseURL}}/products-type/0b888858-387d-4bc7-9cdf-921d74d9da2c",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"d8b3fe9e-b8af-4131-ba54-9c6e2c506d62"
+								"0b888858-387d-4bc7-9cdf-921d74d9da2c"
 							]
 						}
 					},
@@ -492,6 +476,16 @@
 				{
 					"name": " [ADMIN] get-one-receive",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {

@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  Column,
 } from 'typeorm';
 @Entity()
 export class BaseEntity {
@@ -14,4 +15,7 @@ export class BaseEntity {
 
   @CreateDateColumn()
   createAt: Date;
+
+  @Column({ type: 'text', nullable: true })
+  note: string;
 }
