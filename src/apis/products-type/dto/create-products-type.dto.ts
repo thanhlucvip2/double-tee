@@ -6,9 +6,6 @@ export class CreateProductsTypeDto {
   sku: string;
 
   @IsNotEmpty()
-  color: string;
-
-  @IsNotEmpty()
   name: string;
 
   note?: string;

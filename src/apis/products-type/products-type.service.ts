@@ -88,10 +88,17 @@ export class ProductsTypeService {
       );
     }
 
-    await this.productTypeRepository.update({ id }, updateProductsTypeDto);
+    await this.productTypeRepository.update(
+      { id },
+      {
+        ...updateProductsTypeDto,
+        sku: product.sku,
+      },
+    );
 
     const newProductResult = await this.productTypeRepository.findOne({
       where: { id },
+      relations: ['receive'],
     });
     return newProductResult;
   }

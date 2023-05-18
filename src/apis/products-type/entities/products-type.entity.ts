@@ -6,9 +6,6 @@ export class ProductsTypeEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  color: string;
-
   @Column({ type: 'varchar', length: 20, nullable: false, unique: true })
   sku: string;
 

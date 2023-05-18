@@ -14,5 +14,9 @@ export class CreateReceiveDto {
   @Length(1, 20)
   sku: string;
 
+  @IsNotEmpty()
+  @Length(1, 20)
+  supplier_code: string;
+
   note?: string;
 }
