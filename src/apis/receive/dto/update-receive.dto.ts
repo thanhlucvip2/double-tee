@@ -1,4 +1,4 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class UpdateReceiveDto {
   @IsNotEmpty()
@@ -9,10 +9,6 @@ export class UpdateReceiveDto {
 
   @IsNotEmpty()
   total_price: number;
-
-  @IsNotEmpty()
-  @Length(1, 20)
-  sku: string;
 
   note?: string;
 }

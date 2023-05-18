@@ -1,4 +1,4 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateReceiveDto {
   @IsNotEmpty()
@@ -8,15 +8,13 @@ export class CreateReceiveDto {
   fee_shipping: number;
 
   @IsNotEmpty()
+  products_type_id: string;
+
+  @IsNotEmpty()
+  supplier_id: string;
+
+  @IsNotEmpty()
   total_price: number;
-
-  @IsNotEmpty()
-  @Length(1, 20)
-  sku: string;
-
-  @IsNotEmpty()
-  @Length(1, 20)
-  supplier_code: string;
 
   note?: string;
 }

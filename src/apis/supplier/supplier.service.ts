@@ -15,15 +15,6 @@ export class SupplierService {
     private entityManager: EntityManager,
   ) {}
   async create(createSupplierDto: CreateSupplierDto) {
-    const supplier = await this.supplierRepository.findOne({
-      where: { supplier_code: createSupplierDto.supplier_code },
-    });
-    if (supplier) {
-      throw new HttpException(
-        'Mã nhà cung cấp đã tồn tại trong hệ thống',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
     const newProduct = await this.supplierRepository.create(createSupplierDto);
 
     return await this.supplierRepository.save(newProduct);
@@ -89,7 +80,6 @@ export class SupplierService {
       { id },
       {
         ...updateSupplierDto,
-        supplier_code: supplier.supplier_code,
       },
     );
 

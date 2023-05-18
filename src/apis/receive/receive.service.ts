@@ -24,23 +24,23 @@ export class ReceiveService {
 
   async create(createReceiveDto: CreateReceiveDto) {
     const products_type = await this.productTypeRepository.findOne({
-      where: { sku: createReceiveDto.sku },
+      where: { id: createReceiveDto.products_type_id },
     });
 
     if (!products_type) {
       throw new HttpException(
-        'Mã hàng không tồn tại trong hệ thống',
+        'Loại hàng không tồn tại trong hệ thống',
         HttpStatus.BAD_REQUEST,
       );
     }
 
     const supplier = await this.supplierRepository.findOne({
-      where: { supplier_code: createReceiveDto.supplier_code },
+      where: { id: createReceiveDto.supplier_id },
     });
 
     if (!supplier) {
       throw new HttpException(
-        'Mã nhà cung cấp không tồn tại trong hệ thống',
+        'Nhà cung cấp không tồn tại trong hệ thống',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -50,7 +50,6 @@ export class ReceiveService {
       quantity: createReceiveDto.quantity,
       note: createReceiveDto.note,
       total_price: createReceiveDto.total_price,
-      sku: createReceiveDto.sku,
       supplier,
       products_type,
     });
@@ -116,16 +115,16 @@ export class ReceiveService {
       );
     }
 
-    const products_type = await this.productTypeRepository.findOne({
-      where: { sku: updateReceiveDto.sku },
-    });
+    // const products_type = await this.productTypeRepository.findOne({
+    //   where: { sku: updateReceiveDto.sku },
+    // });
 
-    if (!products_type) {
-      throw new HttpException(
-        'Mã hàng không tồn tại trong hệ thống',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    // if (!products_type) {
+    //   throw new HttpException(
+    //     'Mã hàng không tồn tại trong hệ thống',
+    //     HttpStatus.BAD_REQUEST,
+    //   );
+    // }
     await this.receiveRepository.update(
       { id },
       {
@@ -133,8 +132,8 @@ export class ReceiveService {
         quantity: updateReceiveDto.quantity,
         note: updateReceiveDto.note,
         total_price: updateReceiveDto.total_price,
-        sku: updateReceiveDto.sku,
-        products_type,
+
+        // products_type,
       },
     );
 

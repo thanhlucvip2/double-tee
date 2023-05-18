@@ -249,13 +249,8 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "sku",
-									"value": "a1a",
-									"type": "text"
-								},
-								{
 									"key": "name",
-									"value": "áo thun",
+									"value": "Áo carton",
 									"type": "text"
 								}
 							]
@@ -449,18 +444,28 @@
 									"type": "text"
 								},
 								{
-									"key": "sku",
-									"value": "a1",
-									"type": "text"
-								},
-								{
 									"key": "note",
 									"value": "dasdasdasdaddasdsa",
 									"type": "text"
 								},
 								{
-									"key": "supplier_code",
-									"value": "a2",
+									"key": "productsTypeId",
+									"value": "dasdas",
+									"type": "text"
+								},
+								{
+									"key": "supplierId",
+									"value": "asdasda",
+									"type": "text"
+								},
+								{
+									"key": "products_type_id",
+									"value": "e358a6d7-af49-48bc-8aa6-58033af7b53c",
+									"type": "text"
+								},
+								{
+									"key": "supplier_id",
+									"value": "5a12c310-5689-4ec8-8ad5-a5682fd7c1e1",
 									"type": "text"
 								}
 							]
@@ -653,11 +658,6 @@
 									"type": "text"
 								},
 								{
-									"key": "supplier_code",
-									"value": "a3",
-									"type": "text"
-								},
-								{
 									"key": "note",
 									"value": "dasdasdasd",
 									"type": "text"
@@ -729,13 +729,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/supplier/809bb580-2b63-4d81-937e-1d1c81e05c8b",
+							"raw": "{{baseURL}}/supplier/5a12c310-5689-4ec8-8ad5-a5682fd7c1e1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"supplier",
-								"809bb580-2b63-4d81-937e-1d1c81e05c8b"
+								"5a12c310-5689-4ec8-8ad5-a5682fd7c1e1"
 							]
 						}
 					},
@@ -761,12 +761,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "a",
+									"value": "asss",
 									"type": "text"
 								},
 								{
 									"key": "address",
-									"value": "a",
+									"value": "ass",
 									"type": "text"
 								},
 								{
@@ -776,19 +776,19 @@
 								},
 								{
 									"key": "note",
-									"value": "a",
+									"value": "aa",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/supplier/59e5be1d-9d34-43ed-b1f6-128c914cbef0",
+							"raw": "{{baseURL}}/supplier/5a12c310-5689-4ec8-8ad5-a5682fd7c1e1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"supplier",
-								"59e5be1d-9d34-43ed-b1f6-128c914cbef0"
+								"5a12c310-5689-4ec8-8ad5-a5682fd7c1e1"
 							]
 						}
 					},

@@ -16,12 +16,12 @@ export class ProductsTypeService {
   ) {}
 
   async create(createProductsTypeDto: CreateProductsTypeDto) {
-    const sku = await this.productTypeRepository.findOne({
-      where: { sku: createProductsTypeDto.sku },
+    const name = await this.productTypeRepository.findOne({
+      where: { name: createProductsTypeDto.name },
     });
-    if (sku) {
+    if (name) {
       throw new HttpException(
-        'Mã hàng đã tồn tại trong hệ thống',
+        'Tên hàng đã tồn tại trong hệ thống',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -92,7 +92,6 @@ export class ProductsTypeService {
       { id },
       {
         ...updateProductsTypeDto,
-        sku: product.sku,
       },
     );
 

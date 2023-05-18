@@ -14,12 +14,11 @@ export class ReceiveEntity extends BaseEntity {
   @Column({ type: 'int', nullable: false })
   total_price: number;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  sku: string;
-
   @ManyToOne(() => ProductsTypeEntity, (product_type) => product_type.receive)
+  @JoinColumn({ name: 'products_type_id' })
   products_type: ProductsTypeEntity;
 
   @ManyToOne(() => SupplierEntity, (supplier) => supplier.receive)
+  @JoinColumn({ name: 'supplier_id' })
   supplier: SupplierEntity;
 }

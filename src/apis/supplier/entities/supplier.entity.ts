@@ -13,9 +13,6 @@ export class SupplierEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   phone_number: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false, unique: true })
-  supplier_code: string;
-
   @OneToMany(() => ReceiveEntity, (receive) => receive.supplier)
   receive: ReceiveEntity[];
 }
