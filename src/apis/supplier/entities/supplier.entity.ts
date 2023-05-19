@@ -1,6 +1,5 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 import { BaseEntity } from '@/systems/base.entity';
-import { ReceiveEntity } from '@/apis/receive/entities/receive.entity';
 
 @Entity('tb_supplier')
 export class SupplierEntity extends BaseEntity {
@@ -10,9 +9,15 @@ export class SupplierEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   address: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: false, unique: true })
+  supplier_code: string;
+
+  @Column({ type: 'varchar', nullable: false, unique: true })
   phone_number: string;
 
-  @OneToMany(() => ReceiveEntity, (receive) => receive.supplier)
-  receive: ReceiveEntity[];
+  @Column({ type: 'varchar', nullable: true })
+  description: string;
+
+  // @OneToMany(() => ReceiveEntity, (receive) => receive.supplier)
+  // receive: ReceiveEntity[];
 }

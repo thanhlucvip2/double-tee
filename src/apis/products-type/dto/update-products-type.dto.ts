@@ -1,8 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
-
 export class UpdateProductsTypeDto {
-  @IsNotEmpty()
-  name: string;
-
+  name?: string;
+  description?: string;
   note?: string;
 }

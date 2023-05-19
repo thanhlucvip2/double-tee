@@ -14,8 +14,41 @@ export class SupplierService {
     private readonly supplierRepository: Repository<SupplierEntity>,
     private entityManager: EntityManager,
   ) {}
-  async create(createSupplierDto: CreateSupplierDto) {
-    const newProduct = await this.supplierRepository.create(createSupplierDto);
+
+  async create({
+    supplier_code,
+    name,
+    address,
+    phone_number,
+    description,
+    note,
+  }: CreateSupplierDto) {
+    const checkPhoneNumber = await this.supplierRepository.findOne({
+      where: { phone_number },
+    });
+    if (checkPhoneNumber) {
+      throw new HttpException(
+        'Số điện thoại đã tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const checkSupplierCode = await this.supplierRepository.findOne({
+      where: { supplier_code },
+    });
+    if (checkSupplierCode) {
+      throw new HttpException(
+        'Mã nhà cung cấp đã tồn tại trong hệ thống',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const newProduct = await this.supplierRepository.create({
+      supplier_code,
+      name,
+      address,
+      phone_number,
+      description,
+      note,
+    });
 
     return await this.supplierRepository.save(newProduct);
   }
@@ -53,7 +86,7 @@ export class SupplierService {
   async findOne(id: string) {
     const productType = await this.supplierRepository.findOne({
       where: { id },
-      relations: ['receive'],
+      // relations: ['receive'],
     });
     if (!productType) {
       throw new HttpException(
@@ -64,7 +97,10 @@ export class SupplierService {
     return productType;
   }
 
-  async update(id: string, updateSupplierDto: UpdateSupplierDto) {
+  async update(
+    id: string,
+    { name, address, phone_number, description, note }: UpdateSupplierDto,
+  ) {
     const supplier = await this.supplierRepository.findOne({
       where: { id },
     });
@@ -78,14 +114,12 @@ export class SupplierService {
 
     await this.supplierRepository.update(
       { id },
-      {
-        ...updateSupplierDto,
-      },
+      { name, address, phone_number, description, note },
     );
 
     const newProductResult = await this.supplierRepository.findOne({
       where: { id },
-      relations: ['receive'],
+      // relations: ['receive'],
     });
     return newProductResult;
   }

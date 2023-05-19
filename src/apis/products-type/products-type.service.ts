@@ -15,19 +15,24 @@ export class ProductsTypeService {
     private entityManager: EntityManager,
   ) {}
 
-  async create(createProductsTypeDto: CreateProductsTypeDto) {
-    const name = await this.productTypeRepository.findOne({
-      where: { name: createProductsTypeDto.name },
+  async create({ name, sku, description, note }: CreateProductsTypeDto) {
+    const productType = await this.productTypeRepository.findOne({
+      where: { sku },
     });
-    if (name) {
+
+    if (productType) {
       throw new HttpException(
-        'Tên hàng đã tồn tại trong hệ thống',
+        'Mã hàng đã tồn tại trong hệ thống',
         HttpStatus.BAD_REQUEST,
       );
     }
-    const newProduct = await this.productTypeRepository.create(
-      createProductsTypeDto,
-    );
+
+    const newProduct = await this.productTypeRepository.create({
+      name,
+      sku,
+      description,
+      note,
+    });
 
     return await this.productTypeRepository.save(newProduct);
   }
@@ -65,25 +70,22 @@ export class ProductsTypeService {
   async findOne(id: string) {
     const productType = await this.productTypeRepository.findOne({
       where: { id },
-      relations: ['receive'],
+      // relations: ['receive'],
     });
     if (!productType) {
-      throw new HttpException(
-        'Loại hàng không tồn tại!',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException('Mã hàng không tồn tại!', HttpStatus.BAD_REQUEST);
     }
     return productType;
   }
 
-  async update(id: string, updateProductsTypeDto: UpdateProductsTypeDto) {
-    const product = await this.productTypeRepository.findOne({
+  async update(id: string, { name, description, note }: UpdateProductsTypeDto) {
+    const productType = await this.productTypeRepository.findOne({
       where: { id },
     });
 
-    if (!product) {
+    if (!productType) {
       throw new HttpException(
-        'Sản phẩm không tồn tại trong hệ thống',
+        'Mã hàng phẩm không tồn tại trong hệ thống',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -91,13 +93,15 @@ export class ProductsTypeService {
     await this.productTypeRepository.update(
       { id },
       {
-        ...updateProductsTypeDto,
+        name,
+        description,
+        note,
       },
     );
 
     const newProductResult = await this.productTypeRepository.findOne({
       where: { id },
-      relations: ['receive'],
+      // relations: ['receive'],
     });
     return newProductResult;
   }
