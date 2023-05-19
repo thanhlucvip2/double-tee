@@ -86,7 +86,7 @@ export class SupplierService {
   async findOne(id: string) {
     const productType = await this.supplierRepository.findOne({
       where: { id },
-      // relations: ['receive'],
+      relations: ['import_product_order'],
     });
     if (!productType) {
       throw new HttpException(
@@ -119,7 +119,7 @@ export class SupplierService {
 
     const newProductResult = await this.supplierRepository.findOne({
       where: { id },
-      // relations: ['receive'],
+      relations: ['import_product_order'],
     });
     return newProductResult;
   }

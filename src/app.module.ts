@@ -7,6 +7,7 @@ import { HttpErrorFilter } from '@/systems/http-error.filter';
 import { UserModule } from '@/user/user.module';
 import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
 import { SupplierModule } from './apis/supplier/supplier.module';
+import { ImportProductsOrderModule } from './apis/import-products/import-products-order/import-products-order.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -19,6 +20,7 @@ import { SupplierModule } from './apis/supplier/supplier.module';
     UserModule,
     ProductsTypeModule,
     SupplierModule,
+    ImportProductsOrderModule,
   ],
   providers: [
     {
