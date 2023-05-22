@@ -1,8 +1,10 @@
+import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
 import { BaseEntity } from '@/systems/base.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { ImportProductsOrderEntity } from '../../import-products-order/entities/import-products-order.entity';
 
 @Entity('tb_import_product_detail')
-export class ImportProductsDetail extends BaseEntity {
+export class ImportProductsDetailEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   sku: string;
 
@@ -23,4 +25,16 @@ export class ImportProductsDetail extends BaseEntity {
 
   @Column({ type: 'int', nullable: true, default: 0 })
   down_price: string;
+
+  @ManyToOne(
+    () => ProductsTypeEntity,
+    (products_type) => products_type.import_product_detail,
+  )
+  products_type: ProductsTypeEntity;
+
+  @ManyToOne(
+    () => ImportProductsOrderEntity,
+    (products_type) => products_type.import_product_detail,
+  )
+  import_product_order: ImportProductsOrderEntity;
 }

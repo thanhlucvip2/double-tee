@@ -8,6 +8,7 @@ import { UserModule } from '@/user/user.module';
 import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
 import { SupplierModule } from './apis/supplier/supplier.module';
 import { ImportProductsOrderModule } from './apis/import-products/import-products-order/import-products-order.module';
+import { ImportProductsDetailModule } from './apis/import-products/import-products-detail/import-products-detail.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -21,6 +22,7 @@ import { ImportProductsOrderModule } from './apis/import-products/import-product
     ProductsTypeModule,
     SupplierModule,
     ImportProductsOrderModule,
+    ImportProductsDetailModule,
   ],
   providers: [
     {

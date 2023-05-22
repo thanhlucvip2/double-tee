@@ -33,12 +33,14 @@ export class ImportProductsOrderController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard, AdminRoleGuard)
   findOne(@Param('id') id: string) {
     return this.importProductsOrderService.findOne(id);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard, AdminRoleGuard)
   remove(@Param('id') id: string) {
-    return this.importProductsOrderService.remove(+id);
+    return this.importProductsOrderService.remove(id);
   }
 }

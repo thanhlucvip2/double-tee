@@ -1,9 +1,10 @@
 import { SupplierEntity } from '@/apis/supplier/entities/supplier.entity';
 import { IMPORT_PRODUCTS_ORDER } from '@/constants/import_products_order';
 import { BaseEntity } from '@/systems/base.entity';
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
+import { ImportProductsDetailEntity } from '../../import-products-detail/entities/import-products-detail.entity';
 
-@Entity()
+@Entity('tb_import_product_order')
 export class ImportProductsOrderEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   supplier_code: string;
@@ -32,6 +33,14 @@ export class ImportProductsOrderEntity extends BaseEntity {
   })
   status: string;
 
+  // nhà cung cấp
   @ManyToOne(() => SupplierEntity, (receive) => receive.import_product_order)
   supplier: SupplierEntity;
+
+  // danh sách chi tiết đơn nhập hàng
+  @OneToMany(
+    () => ImportProductsDetailEntity,
+    (import_products_detail) => import_products_detail.import_product_order,
+  )
+  import_product_detail: ImportProductsDetailEntity[];
 }

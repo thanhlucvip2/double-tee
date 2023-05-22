@@ -73,7 +73,7 @@ export class ImportProductsOrderService {
     const importProductsOrder =
       await this.importProductsOrderRepository.findOne({
         where: { id },
-        relations: ['supplier'],
+        relations: ['supplier', 'import_product_detail'],
       });
     if (!importProductsOrder) {
       throw new HttpException(
@@ -85,7 +85,7 @@ export class ImportProductsOrderService {
   }
 
   //TODO chưa remove được
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} importProductsOrder`;
   }
 }

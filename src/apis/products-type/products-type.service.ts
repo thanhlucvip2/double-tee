@@ -70,7 +70,7 @@ export class ProductsTypeService {
   async findOne(id: string) {
     const productType = await this.productTypeRepository.findOne({
       where: { id },
-      // relations: ['receive'],
+      relations: ['import_product_detail'],
     });
     if (!productType) {
       throw new HttpException('Mã hàng không tồn tại!', HttpStatus.BAD_REQUEST);
@@ -101,7 +101,7 @@ export class ProductsTypeService {
 
     const newProductResult = await this.productTypeRepository.findOne({
       where: { id },
-      // relations: ['receive'],
+      relations: ['import_product_detail'],
     });
     return newProductResult;
   }
