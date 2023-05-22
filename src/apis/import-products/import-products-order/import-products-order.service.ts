@@ -17,7 +17,7 @@ export class ImportProductsOrderService {
     private entityManager: EntityManager,
   ) {}
 
-  async create({ supplier_code }: CreateImportProductsOrderDto) {
+  async create({ supplier_code, note }: CreateImportProductsOrderDto) {
     const supplierData = await this.supplierRepository.findOne({
       where: { supplier_code },
     });
@@ -30,6 +30,7 @@ export class ImportProductsOrderService {
     const newImportPRoductsOrder =
       await this.importProductsOrderRepository.create({
         supplier_code,
+        note,
         supplier: supplierData,
       });
     await this.importProductsOrderRepository.save(newImportPRoductsOrder);

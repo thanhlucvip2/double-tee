@@ -4,10 +4,15 @@ import { ImportProductsDetailController } from './import-products-detail.control
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ImportProductsDetailEntity } from './entities/import-products-detail.entity';
 import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
+import { ImportProductsOrderEntity } from '../import-products-order/entities/import-products-order.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ImportProductsDetailEntity, ProductsTypeEntity]),
+    TypeOrmModule.forFeature([
+      ImportProductsDetailEntity,
+      ProductsTypeEntity,
+      ImportProductsOrderEntity,
+    ]),
   ],
   controllers: [ImportProductsDetailController],
   providers: [ImportProductsDetailService],

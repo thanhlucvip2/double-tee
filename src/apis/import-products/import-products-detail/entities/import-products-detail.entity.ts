@@ -15,16 +15,16 @@ export class ImportProductsDetailEntity extends BaseEntity {
   color: string;
 
   @Column({ type: 'int', nullable: false })
-  price: string;
+  price: number;
 
   @Column({ type: 'int', nullable: false })
-  quantity: string;
+  quantity: number;
 
   @Column({ type: 'int', nullable: false })
-  total_price: string;
+  total_price: number;
 
   @Column({ type: 'int', nullable: true, default: 0 })
-  down_price: string;
+  down_price: number;
 
   @ManyToOne(
     () => ProductsTypeEntity,

@@ -1,17 +1,135 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateImportProductsDetailDto } from './dto/create-import-products-detail.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ImportProductsDetailEntity } from './entities/import-products-detail.entity';
+import { Repository } from 'typeorm';
+import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
+import { ImportProductsOrderEntity } from '../import-products-order/entities/import-products-order.entity';
 
 @Injectable()
 export class ImportProductsDetailService {
-  create(createImportProductsDetailDto: CreateImportProductsDetailDto) {
-    return 'This action adds a new importProductsDetail';
+  constructor(
+    @InjectRepository(ImportProductsDetailEntity)
+    private readonly importProductsDetailRepository: Repository<ImportProductsDetailEntity>,
+    @InjectRepository(ProductsTypeEntity)
+    private readonly productTypeRepository: Repository<ProductsTypeEntity>,
+    @InjectRepository(ImportProductsOrderEntity)
+    private readonly importProductsOrderRepository: Repository<ImportProductsOrderEntity>,
+  ) {}
+  async create({
+    sku,
+    size,
+    color,
+    price,
+    quantity,
+    down_price,
+    note,
+    import_product_order_id,
+  }: CreateImportProductsDetailDto) {
+    const productsType = await this.productTypeRepository.findOne({
+      where: { sku },
+    });
+    if (!productsType) {
+      throw new HttpException(
+        'Mã sản phẩm không tồn tại trong hệ thống!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const importProductOrder = await this.importProductsOrderRepository.findOne(
+      {
+        where: { id: import_product_order_id },
+        relations: ['import_product_detail'],
+      },
+    );
+    if (!importProductOrder) {
+      throw new HttpException(
+        'Đơn hàng không tồn tại trong hệ thống!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const importProductsDetail =
+      await this.importProductsDetailRepository.create({
+        sku,
+        color,
+        size,
+        price,
+        note,
+        down_price,
+        quantity,
+        total_price: price * quantity - down_price,
+        products_type: productsType,
+        import_product_order: importProductOrder,
+      });
+
+    await this.importProductsDetailRepository.save(importProductsDetail);
+
+    // update total price order
+    const importProductOrderTotalPrice =
+      importProductOrder.import_product_detail
+        .map((item) => item.total_price)
+        .reduce((a, b) => {
+          return a + b;
+        }, 0);
+    await this.importProductsOrderRepository.update(
+      {
+        id: import_product_order_id,
+      },
+      {
+        total_price:
+          importProductOrderTotalPrice + importProductsDetail.total_price,
+      },
+    );
+
+    return await this.importProductsDetailRepository.findOne({
+      where: { id: importProductsDetail.id },
+      relations: ['products_type', 'import_product_order'],
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} importProductsDetail`;
+  async findOne(id: string) {
+    const importProductsTypeDetail =
+      await this.importProductsDetailRepository.findOne({
+        where: { id },
+        relations: ['products_type', 'import_product_order'],
+      });
+    if (!importProductsTypeDetail) {
+      throw new HttpException(
+        'Chi tiết đơn hàng không tồn tại trong hệ thống!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return importProductsTypeDetail;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} importProductsDetail`;
+  async remove(id: string) {
+    const importProductsTypeDetail =
+      await this.importProductsDetailRepository.findOne({
+        where: { id },
+        relations: ['import_product_order'],
+      });
+    if (!importProductsTypeDetail) {
+      throw new HttpException(
+        'Chi tiết đơn hàng không tồn tại trong hệ thống!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const import_product_order_id =
+      importProductsTypeDetail.import_product_order.id;
+
+    await this.importProductsDetailRepository.delete({ id });
+    await this.importProductsOrderRepository.update(
+      {
+        id: import_product_order_id,
+      },
+      {
+        total_price:
+          importProductsTypeDetail.import_product_order.total_price -
+          importProductsTypeDetail.total_price,
+      },
+    );
+    return {
+      message: 'Xóa thành công',
+    };
   }
 }

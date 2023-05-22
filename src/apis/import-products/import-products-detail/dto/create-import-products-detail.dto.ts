@@ -12,21 +12,16 @@ export class CreateImportProductsDetailDto {
 
   @IsNotEmpty()
   @IsNumber()
-  price: string;
+  price: number;
 
   @IsNotEmpty()
   @IsNumber()
-  quantity: string;
+  quantity: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  total_price: string;
-
-  down_price: string;
-
-  @IsNotEmpty()
-  products_type_id: string;
+  down_price: number;
 
   @IsNotEmpty()
   import_product_order_id: string;
+
+  note?: string;
 }

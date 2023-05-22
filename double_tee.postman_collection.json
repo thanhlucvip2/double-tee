@@ -351,13 +351,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/a927f434-eb8f-4b5f-97b7-6c5ae3a0da56",
+							"raw": "{{baseURL}}/products-type/64c28465-97ef-4cc6-885a-6f31246792cf",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"a927f434-eb8f-4b5f-97b7-6c5ae3a0da56"
+								"64c28465-97ef-4cc6-885a-6f31246792cf"
 							]
 						}
 					},
@@ -570,13 +570,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/supplier/5be3ee66-b51c-4934-89c3-24c57ce2971f",
+							"raw": "{{baseURL}}/supplier/db9a5aa3-314b-40cb-86a1-b6b36c6fb4f3",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"supplier",
-								"5be3ee66-b51c-4934-89c3-24c57ce2971f"
+								"db9a5aa3-314b-40cb-86a1-b6b36c6fb4f3"
 							]
 						}
 					},
@@ -679,6 +679,16 @@
 						{
 							"name": "[ADMIN] create-import-products-order",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -746,13 +756,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-order/62a291f2-1a8c-4710-b7eb-d725ff325e06",
+									"raw": "{{baseURL}}/import-products-order/e9bea075-ad34-4614-af65-3d3179839cc0",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-order",
-										"62a291f2-1a8c-4710-b7eb-d725ff325e06"
+										"e9bea075-ad34-4614-af65-3d3179839cc0"
 									]
 								}
 							},
@@ -762,7 +772,100 @@
 				},
 				{
 					"name": "detail",
-					"item": []
+					"item": [
+						{
+							"name": "[ADMIN] create-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"sku\": \"NO003\", //require\r\n  \"size\": \"M\", //require\r\n  \"color\": \"blue\", //require\r\n  \"price\": 56, //require\r\n  \"quantity\": 10, //require\r\n  \"import_product_order_id\": \"e9bea075-ad34-4614-af65-3d3179839cc0\", //require\r\n  \"down_price\": 70\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-one-import-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail/25f778e4-619d-4005-a375-b647e84b2640",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail",
+										"25f778e4-619d-4005-a375-b647e84b2640"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] remove-import-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail/7a0b5929-3c9b-4cd0-a20c-233adcab20b8",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail",
+										"7a0b5929-3c9b-4cd0-a20c-233adcab20b8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
