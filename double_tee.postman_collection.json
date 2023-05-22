@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "313d03f5-cceb-47cc-8183-c99748cc6aee",
+		"_postman_id": "3328bfab-a5f4-43cf-86b2-fc5281a0a4d0",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26386580"
+		"_exporter_id": "27054020"
 	},
 	"item": [
 		{
@@ -756,13 +756,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-order/e9bea075-ad34-4614-af65-3d3179839cc0",
+									"raw": "{{baseURL}}/import-products-order/3048d4e2-6d64-480e-baa5-8fbc595fb23a",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-order",
-										"e9bea075-ad34-4614-af65-3d3179839cc0"
+										"3048d4e2-6d64-480e-baa5-8fbc595fb23a"
 									]
 								}
 							},
@@ -790,7 +790,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"sku\": \"NO003\", //require\r\n  \"size\": \"M\", //require\r\n  \"color\": \"blue\", //require\r\n  \"price\": 56, //require\r\n  \"quantity\": 10, //require\r\n  \"import_product_order_id\": \"e9bea075-ad34-4614-af65-3d3179839cc0\", //require\r\n  \"down_price\": 70\r\n}",
+									"raw": "{\r\n    \"sku\": \"NO001\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 56, //require\r\n    \"quantity\": 10, //require\r\n    \"import_product_order_id\": \"3048d4e2-6d64-480e-baa5-8fbc595fb23a\", //require\r\n    \"down_price\": 70,\r\n    \"note\": \"ghi chú\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -853,13 +853,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-detail/7a0b5929-3c9b-4cd0-a20c-233adcab20b8",
+									"raw": "{{baseURL}}/import-products-detail/1766e424-eaa8-424d-9cb1-b7ca0d158b26",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-detail",
-										"7a0b5929-3c9b-4cd0-a20c-233adcab20b8"
+										"1766e424-eaa8-424d-9cb1-b7ca0d158b26"
 									]
 								}
 							},

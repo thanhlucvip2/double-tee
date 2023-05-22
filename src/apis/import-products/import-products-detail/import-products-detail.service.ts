@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateImportProductsDetailDto } from './dto/create-import-products-detail.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ImportProductsDetailEntity } from './entities/import-products-detail.entity';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
 import { ImportProductsOrderEntity } from '../import-products-order/entities/import-products-order.entity';
 
@@ -15,6 +15,7 @@ export class ImportProductsDetailService {
     private readonly productTypeRepository: Repository<ProductsTypeEntity>,
     @InjectRepository(ImportProductsOrderEntity)
     private readonly importProductsOrderRepository: Repository<ImportProductsOrderEntity>,
+    private entityManager: EntityManager,
   ) {}
   async create({
     sku,
@@ -64,20 +65,27 @@ export class ImportProductsDetailService {
 
     await this.importProductsDetailRepository.save(importProductsDetail);
 
-    // update total price order
-    const importProductOrderTotalPrice =
-      importProductOrder.import_product_detail
-        .map((item) => item.total_price)
-        .reduce((a, b) => {
-          return a + b;
-        }, 0);
+    const queryBuilder = this.entityManager
+      .createQueryBuilder(ImportProductsDetailEntity, 'import_products_detail')
+      .select('SUM(import_products_detail.total_price)', 'total_price')
+      .innerJoin(
+        ImportProductsOrderEntity,
+        'importProductOrder',
+        'importProductOrder.id = import_products_detail.importProductOrderId',
+      )
+      .where('importProductOrder.id = :id', {
+        id: import_product_order_id,
+      });
+
+    const result = await queryBuilder.getRawOne();
+    const totalPrice = result.total_price;
+
     await this.importProductsOrderRepository.update(
       {
         id: import_product_order_id,
       },
       {
-        total_price:
-          importProductOrderTotalPrice + importProductsDetail.total_price,
+        total_price: +totalPrice ,
       },
     );
 
