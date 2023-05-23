@@ -85,7 +85,7 @@ export class ImportProductsDetailService {
         id: import_product_order_id,
       },
       {
-        total_price: +totalPrice ,
+        total_price: +totalPrice,
       },
     );
 

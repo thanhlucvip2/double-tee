@@ -89,4 +89,8 @@ export class ImportProductsOrderService {
   remove(id: string) {
     return `This action removes a #${id} importProductsOrder`;
   }
+
+  async upPayment() {
+    return;
+  }
 }
