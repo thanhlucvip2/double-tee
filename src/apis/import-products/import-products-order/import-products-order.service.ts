@@ -6,6 +6,8 @@ import { EntityManager, Repository } from 'typeorm';
 import { SupplierEntity } from '@/apis/supplier/entities/supplier.entity';
 import { PaginationDto } from '@/shared/pagination.dto';
 import { ResponsePagination } from '@/shared/response.pagination';
+import { PaymentOrderDto } from './dto/payment-import-products-order.dto';
+import { IMPORT_PRODUCTS_ORDER } from '@/constants/import_products_order';
 
 @Injectable()
 export class ImportProductsOrderService {
@@ -90,7 +92,65 @@ export class ImportProductsOrderService {
     return `This action removes a #${id} importProductsOrder`;
   }
 
-  async upPayment() {
-    return;
+  async paymentOrder({
+    down_price,
+    fee_ship,
+    payment_success,
+    import_product_order_id,
+  }: PaymentOrderDto) {
+    const importProductsOrder =
+      await this.importProductsOrderRepository.findOne({
+        where: { id: import_product_order_id },
+        relations: ['supplier', 'import_product_detail'],
+      });
+    if (!importProductsOrder) {
+      throw new HttpException(
+        'Đơn nhập hàng không tồn tại!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    // check đơn đã ở trạng thái done chưa
+    if (importProductsOrder.status === IMPORT_PRODUCTS_ORDER.DONE) {
+      throw new HttpException(
+        'Đơn đã hoàn thành không được cập nhật!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const debt =
+      +importProductsOrder.total_price +
+      +fee_ship -
+      +down_price -
+      +payment_success;
+
+    if (debt < 0) {
+      throw new HttpException(
+        'Chi phí thanh toán không được lớn hơn số tiền nợ công!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    // return debt;
+    await this.importProductsOrderRepository.update(
+      {
+        id: import_product_order_id,
+      },
+      {
+        debt,
+        fee_ship,
+        down_price,
+        payment_success,
+        // chỉnh lại status done khi thanh toán hết
+        status:
+          debt === 0 && importProductsOrder.total_price !== 0
+            ? IMPORT_PRODUCTS_ORDER.DONE
+            : importProductsOrder.status,
+      },
+    );
+
+    return await this.importProductsOrderRepository.findOne({
+      where: { id: import_product_order_id },
+      relations: ['supplier', 'import_product_detail'],
+    });
   }
 }

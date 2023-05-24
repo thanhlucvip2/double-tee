@@ -5,6 +5,7 @@ import { ImportProductsDetailEntity } from './entities/import-products-detail.en
 import { EntityManager, Repository } from 'typeorm';
 import { ProductsTypeEntity } from '@/apis/products-type/entities/products-type.entity';
 import { ImportProductsOrderEntity } from '../import-products-order/entities/import-products-order.entity';
+import { IMPORT_PRODUCTS_ORDER } from '@/constants/import_products_order';
 
 @Injectable()
 export class ImportProductsDetailService {
@@ -48,7 +49,13 @@ export class ImportProductsDetailService {
         HttpStatus.BAD_REQUEST,
       );
     }
-
+    // check đơn hàng đã done chưa
+    if (importProductOrder.status === IMPORT_PRODUCTS_ORDER.DONE) {
+      throw new HttpException(
+        'Đơn hàng đã kết thúc không thể tạo thêm!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const importProductsDetail =
       await this.importProductsDetailRepository.create({
         sku,
@@ -86,6 +93,16 @@ export class ImportProductsDetailService {
       },
       {
         total_price: +totalPrice,
+        debt:
+          +totalPrice +
+          +importProductOrder.fee_ship -
+          +importProductOrder.down_price -
+          +importProductOrder.payment_success,
+        total_price_payment:
+          +totalPrice +
+          +importProductOrder.fee_ship -
+          +importProductOrder.down_price,
+        status: IMPORT_PRODUCTS_ORDER.PROCESSING,
       },
     );
 
@@ -116,15 +133,37 @@ export class ImportProductsDetailService {
         where: { id },
         relations: ['import_product_order'],
       });
+
     if (!importProductsTypeDetail) {
       throw new HttpException(
         'Chi tiết đơn hàng không tồn tại trong hệ thống!',
         HttpStatus.BAD_REQUEST,
       );
     }
+
     const import_product_order_id =
       importProductsTypeDetail.import_product_order.id;
 
+    // nếu đơn order done thi không được xóa
+    if (
+      importProductsTypeDetail.import_product_order.status ===
+      IMPORT_PRODUCTS_ORDER.DONE
+    ) {
+      throw new HttpException(
+        'Đơn hàng đã kết thúc không được xóa chi tiết đơn!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (
+      importProductsTypeDetail.import_product_order.payment_success >
+      importProductsTypeDetail.import_product_order.total_price -
+        importProductsTypeDetail.total_price
+    ) {
+      throw new HttpException(
+        'Số tiền đã thanh toán đang lớn hơn số tiền order!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await this.importProductsDetailRepository.delete({ id });
     await this.importProductsOrderRepository.update(
       {
@@ -134,10 +173,19 @@ export class ImportProductsDetailService {
         total_price:
           importProductsTypeDetail.import_product_order.total_price -
           importProductsTypeDetail.total_price,
+        debt:
+          importProductsTypeDetail.import_product_order.total_price -
+          importProductsTypeDetail.total_price +
+          +importProductsTypeDetail.import_product_order.fee_ship -
+          +importProductsTypeDetail.import_product_order.down_price -
+          +importProductsTypeDetail.import_product_order.payment_success,
+        total_price_payment:
+          importProductsTypeDetail.import_product_order.total_price -
+          importProductsTypeDetail.total_price,
       },
     );
     return {
-      message: 'Xóa thành công',
+      message: 'Xóa thành công chi tiết đơn',
     };
   }
 }

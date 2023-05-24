@@ -15,23 +15,23 @@ export class ImportProductsOrderEntity extends BaseEntity {
 
   // phí ship
   @Column({ type: 'int', nullable: true, default: 0 })
-  fee_ship: string;
+  fee_ship: number;
 
   // giá giảm
   @Column({ type: 'int', nullable: true, default: 0 })
-  down_price: string;
+  down_price: number;
 
   // công nợ
   @Column({ type: 'int', nullable: true, default: 0 })
-  debt: string;
+  debt: number;
 
   // số tiền đã thanh toán
   @Column({ type: 'int', nullable: true, default: 0 })
-  payment_success: string;
+  payment_success: number;
 
   // số tiền cần thanh toán còn lại
   @Column({ type: 'int', nullable: true, default: 0 })
-  total_price_payment: string;
+  total_price_payment: number;
 
   // trạng thái
   @Column({

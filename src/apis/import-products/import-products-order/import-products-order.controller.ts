@@ -13,6 +13,7 @@ import { CreateImportProductsOrderDto } from './dto/create-import-products-order
 import { PaginationDto } from '@/shared/pagination.dto';
 import { AuthGuard } from '@/guard/auth.guard';
 import { AdminRoleGuard } from '@/guard/admin_role.guard';
+import { PaymentOrderDto } from './dto/payment-import-products-order.dto';
 
 @Controller('import-products-order')
 export class ImportProductsOrderController {
@@ -24,6 +25,12 @@ export class ImportProductsOrderController {
   @UseGuards(AuthGuard, AdminRoleGuard)
   create(@Body() createImportProductsOrderDto: CreateImportProductsOrderDto) {
     return this.importProductsOrderService.create(createImportProductsOrderDto);
+  }
+
+  @Post('payment-order')
+  @UseGuards(AuthGuard, AdminRoleGuard)
+  paymentOrder(@Body() paymentOrder: PaymentOrderDto) {
+    return this.importProductsOrderService.paymentOrder(paymentOrder);
   }
 
   @Get()

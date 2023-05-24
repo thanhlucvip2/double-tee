@@ -756,13 +756,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-order/3048d4e2-6d64-480e-baa5-8fbc595fb23a",
+									"raw": "{{baseURL}}/import-products-order/b72c6a60-5ac5-4073-8759-edd8f5ac7a70",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-order",
-										"3048d4e2-6d64-480e-baa5-8fbc595fb23a"
+										"b72c6a60-5ac5-4073-8759-edd8f5ac7a70"
 									]
 								}
 							},
@@ -771,11 +771,26 @@
 						{
 							"name": "[ADMIN] create-payment-order",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "urlencoded",
-									"urlencoded": []
+									"mode": "raw",
+									"raw": "{\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 10, //require\r\n    \"payment_success\": 2000 //require\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseURL}}/import-products-order/payment-order",
@@ -812,7 +827,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"sku\": \"NO001\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 56, //require\r\n    \"quantity\": 10, //require\r\n    \"import_product_order_id\": \"3048d4e2-6d64-480e-baa5-8fbc595fb23a\", //require\r\n    \"down_price\": 70,\r\n    \"note\": \"ghi chú\"\r\n}",
+									"raw": "{\r\n    \"sku\": \"NO002\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 10, //require\r\n    \"quantity\": 100, //require\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"down_price\": 0,\r\n    \"note\": \"ghi chú\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -875,13 +890,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-detail/1766e424-eaa8-424d-9cb1-b7ca0d158b26",
+									"raw": "{{baseURL}}/import-products-detail/95ed7bb4-33d3-44c6-90ab-4a32be3e8506",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-detail",
-										"1766e424-eaa8-424d-9cb1-b7ca0d158b26"
+										"95ed7bb4-33d3-44c6-90ab-4a32be3e8506"
 									]
 								}
 							},
