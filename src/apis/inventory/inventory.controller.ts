@@ -1,21 +1,14 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
+import { PaginationDto } from '@/shared/pagination.dto';
 
 @Controller('inventory')
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
 
   @Get()
-  findAll() {
-    return this.inventoryService.findAll();
+  findAll(@Query() pagination: PaginationDto) {
+    return this.inventoryService.findAll(pagination);
   }
 
   @Get(':id')

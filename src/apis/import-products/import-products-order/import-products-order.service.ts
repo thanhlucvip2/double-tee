@@ -8,6 +8,7 @@ import { PaginationDto } from '@/shared/pagination.dto';
 import { ResponsePagination } from '@/shared/response.pagination';
 import { PaymentOrderDto } from './dto/payment-import-products-order.dto';
 import { IMPORT_PRODUCTS_ORDER } from '@/constants/import_products_order';
+import { InventoryService } from '@/apis/inventory/inventory.service';
 
 @Injectable()
 export class ImportProductsOrderService {
@@ -17,6 +18,7 @@ export class ImportProductsOrderService {
     @InjectRepository(SupplierEntity)
     private readonly supplierRepository: Repository<SupplierEntity>,
     private entityManager: EntityManager,
+    private readonly inventoryService: InventoryService,
   ) {}
 
   async create({ supplier_code, note }: CreateImportProductsOrderDto) {
@@ -88,8 +90,8 @@ export class ImportProductsOrderService {
   }
 
   //TODO chưa remove được
-  remove(id: string) {
-    return `This action removes a #${id} importProductsOrder`;
+  async remove(id: string) {
+    return await this.inventoryService.findAll({ pageSize: 10, pageIndex: 0 });
   }
 
   async paymentOrder({
@@ -148,9 +150,17 @@ export class ImportProductsOrderService {
       },
     );
 
-    return await this.importProductsOrderRepository.findOne({
-      where: { id: import_product_order_id },
-      relations: ['supplier', 'import_product_detail'],
-    });
+    const loadImportProducts = await this.importProductsOrderRepository.findOne(
+      {
+        where: { id: import_product_order_id },
+        relations: ['supplier', 'import_product_detail'],
+      },
+    );
+    // nếu thanh toán thành công thì nhập vào kho hàng
+    if (loadImportProducts.status === IMPORT_PRODUCTS_ORDER.DONE) {
+      // this.inventoryService.createInventory();
+    }
+
+    return loadImportProducts;
   }
 }

@@ -4,10 +4,12 @@ import { ImportProductsOrderController } from './import-products-order.controlle
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ImportProductsOrderEntity } from './entities/import-products-order.entity';
 import { SupplierEntity } from '@/apis/supplier/entities/supplier.entity';
+import { InventoryModule } from '@/apis/inventory/inventory.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([ImportProductsOrderEntity, SupplierEntity]),
+    InventoryModule,
   ],
   controllers: [ImportProductsOrderController],
   providers: [ImportProductsOrderService],

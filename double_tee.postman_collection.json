@@ -351,13 +351,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/64c28465-97ef-4cc6-885a-6f31246792cf",
+							"raw": "{{baseURL}}/products-type/0cf791b1-0e93-4043-8597-99d3419af4c1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"64c28465-97ef-4cc6-885a-6f31246792cf"
+								"0cf791b1-0e93-4043-8597-99d3419af4c1"
 							]
 						}
 					},
@@ -785,7 +785,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 10, //require\r\n    \"payment_success\": 2000 //require\r\n}",
+									"raw": "{\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 10, //require\r\n    \"payment_success\": 3999 //require\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -903,6 +903,54 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "inventory",
+			"item": [
+				{
+					"name": "get-one-inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/inventory/11764936-a83a-437b-a6b8-20922bde9975",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"inventory",
+								"11764936-a83a-437b-a6b8-20922bde9975"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/inventory/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"inventory",
+								""
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
