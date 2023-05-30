@@ -60,7 +60,32 @@ export class InventoryService {
     return inventoryById;
   }
 
-  async createInventory(data: CreateInventoryDto) {
-    return data;
+  async createInventory(data: CreateInventoryDto[]) {
+    // this.asyncForLoop(data);
+    // const result = await this.asyncForLoop(data);
+
+    this.inventoryRepository
+      .find()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }
+
+  // runTasks(index = 0, results = []) {
+  //   const tasks = [];
+  //   if (index < tasks.length) {
+  //     const task = tasks[index];
+  //     return task()
+  //       .then((result) => {
+  //         results.push(result);
+  //         return runTasks(index + 1, results);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         return runTasks(index + 1, results);
+  //       });
+  //   } else {
+  //     // Tất cả các tác vụ đã hoàn thành
+  //     console.log(results);
+  //   }
+  // }
 }

@@ -112,13 +112,13 @@ export class ImportProductsOrderService {
       );
     }
 
-    // check đơn đã ở trạng thái done chưa
-    if (importProductsOrder.status === IMPORT_PRODUCTS_ORDER.DONE) {
-      throw new HttpException(
-        'Đơn đã hoàn thành không được cập nhật!',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    // // check đơn đã ở trạng thái done chưa
+    // if (importProductsOrder.status === IMPORT_PRODUCTS_ORDER.DONE) {
+    //   throw new HttpException(
+    //     'Đơn đã hoàn thành không được cập nhật!',
+    //     HttpStatus.BAD_REQUEST,
+    //   );
+    // }
 
     const debt =
       +importProductsOrder.total_price +
@@ -158,9 +158,17 @@ export class ImportProductsOrderService {
     );
     // nếu thanh toán thành công thì nhập vào kho hàng
     if (loadImportProducts.status === IMPORT_PRODUCTS_ORDER.DONE) {
-      // this.inventoryService.createInventory();
+      this.inventoryService.createInventory(
+        loadImportProducts.import_product_detail.map((item) => {
+          return {
+            sku: item.sku,
+            size: item.size,
+            color: item.color,
+            quantity: item.quantity,
+          };
+        }),
+      );
     }
-
     return loadImportProducts;
   }
 }
