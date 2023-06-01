@@ -61,31 +61,49 @@ export class InventoryService {
   }
 
   async createInventory(data: CreateInventoryDto[]) {
-    // this.asyncForLoop(data);
-    // const result = await this.asyncForLoop(data);
-
-    this.inventoryRepository
-      .find()
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    const promise = [];
+    for (let i = 0; i < data.length; i++) {
+      promise.push(this.createInventoryData(data[i]));
+    }
+    const response = await Promise.all(promise);
+    console.log(response);
   }
 
-  // runTasks(index = 0, results = []) {
-  //   const tasks = [];
-  //   if (index < tasks.length) {
-  //     const task = tasks[index];
-  //     return task()
-  //       .then((result) => {
-  //         results.push(result);
-  //         return runTasks(index + 1, results);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         return runTasks(index + 1, results);
-  //       });
-  //   } else {
-  //     // Tất cả các tác vụ đã hoàn thành
-  //     console.log(results);
-  //   }
-  // }
+  async createInventoryData(dataInventory: CreateInventoryDto) {
+    const checkInventory = await this.inventoryRepository.findOne({
+      where: {
+        sku: dataInventory.sku,
+        size: dataInventory.size,
+        color: dataInventory.color,
+      },
+    });
+
+    if (!checkInventory) {
+      const newInventory = await this.inventoryRepository.create({
+        quantity: dataInventory.quantity,
+        sku: dataInventory.sku,
+        size: dataInventory.size,
+        color: dataInventory.color,
+      });
+      await this.inventoryRepository.save(newInventory);
+    } else {
+      await this.inventoryRepository.update(
+        {
+          sku: dataInventory.sku,
+          size: dataInventory.size,
+          color: dataInventory.color,
+        },
+        {
+          quantity: checkInventory.quantity + dataInventory.quantity,
+        },
+      );
+    }
+    return await this.inventoryRepository.findOne({
+      where: {
+        sku: dataInventory.sku,
+        size: dataInventory.size,
+        color: dataInventory.color,
+      },
+    });
+  }
 }
