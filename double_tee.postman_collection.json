@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fc1c4654-7c6d-4945-959a-110d32bbe320",
+		"_postman_id": "fa1055df-64ec-4f8b-9edc-924c52fdb955",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26386580"
@@ -471,7 +471,7 @@
 							"urlencoded": [
 								{
 									"key": "supplier_code",
-									"value": "NO21656",
+									"value": "NO001",
 									"description": "reuqire",
 									"type": "text"
 								},
@@ -756,13 +756,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseURL}}/import-products-order/b72c6a60-5ac5-4073-8759-edd8f5ac7a70",
+									"raw": "{{baseURL}}/import-products-order/6a8f8dae-1d73-4ba9-8d76-9a1d66d75842",
 									"host": [
 										"{{baseURL}}"
 									],
 									"path": [
 										"import-products-order",
-										"b72c6a60-5ac5-4073-8759-edd8f5ac7a70"
+										"6a8f8dae-1d73-4ba9-8d76-9a1d66d75842"
 									]
 								}
 							},
@@ -785,7 +785,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 10, //require\r\n    \"payment_success\": 3999 //require\r\n}",
+									"raw": "{\r\n    \"import_product_order_id\": \"7a817829-9113-4dd5-8273-baea03aeb36e\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 1068, //require\r\n    \"payment_success\": 13017 //require\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -827,7 +827,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"sku\": \"NO002\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 10, //require\r\n    \"quantity\": 100, //require\r\n    \"import_product_order_id\": \"b72c6a60-5ac5-4073-8759-edd8f5ac7a70\", //require\r\n    \"down_price\": 0,\r\n    \"note\": \"ghi chú\"\r\n}",
+									"raw": "{\r\n    \"sku\": \"NO002\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 10, //require\r\n    \"quantity\": 100, //require\r\n    \"import_product_order_id\": \"7a817829-9113-4dd5-8273-baea03aeb36e\", //require\r\n    \"down_price\": 0,\r\n    \"note\": \"ghi chú\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -933,7 +933,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/inventory/",
+							"raw": "{{baseURL}}/inventory/?pageIndex=0&pageSize=10",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -944,8 +944,11 @@
 							"query": [
 								{
 									"key": "pageIndex",
-									"value": "1",
-									"disabled": true
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
 								}
 							]
 						}
