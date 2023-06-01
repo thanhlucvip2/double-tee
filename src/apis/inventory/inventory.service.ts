@@ -65,8 +65,7 @@ export class InventoryService {
     for (let i = 0; i < data.length; i++) {
       promise.push(this.createInventoryData(data[i]));
     }
-    const response = await Promise.all(promise);
-    console.log(response);
+    return await Promise.all(promise);
   }
 
   async createInventoryData(dataInventory: CreateInventoryDto) {
