@@ -47,7 +47,7 @@ export class ProductsTypeService {
 
     // const sqlFromDate = convertDateTimeToDateString(fromDate);
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
-
+   // TODO : pagination
     const queryBuilder = await this.entityManager
       .createQueryBuilder(ProductsTypeEntity, 'products_type')
       // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })

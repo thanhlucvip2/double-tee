@@ -221,7 +221,7 @@ export class UserService {
 
     // const sqlFromDate = convertDateTimeToDateString(fromDate);
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
-
+   // TODO : pagination
     const queryBuilder = await this.entityManager
       .createQueryBuilder(UserEntity, 'user')
       // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
