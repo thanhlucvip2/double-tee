@@ -1,23 +1,24 @@
-import { ReceiveEntity } from '@/apis/receive/entities/receive.entity';
+import { ImportProductsDetailEntity } from '@/apis/import-products/import-products-detail/entities/import-products-detail.entity';
+import { InventoryEntity } from '@/apis/inventory/entities/inventory.entity';
 import { BaseEntity } from '@/systems/base.entity';
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
 @Entity({ name: 'tb_products_type' })
 export class ProductsTypeEntity extends BaseEntity {
-  @Column({ type: 'text', nullable: true })
-  note: string;
-
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  color: string;
-
-  @Column({ type: 'varchar', length: 20, nullable: false, unique: true })
+  @Column({ type: 'varchar', nullable: false, unique: true })
   sku: string;
 
-  @Column({ type: 'varchar', length: 5, nullable: false })
-  size: string;
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
-  @OneToMany((type) => ReceiveEntity, (receive) => receive.products_type)
-  receive: ReceiveEntity[];
+  @OneToMany(
+    () => ImportProductsDetailEntity,
+    (import_product_detail) => import_product_detail.products_type,
+  )
+  import_product_detail: ImportProductsDetailEntity[];
+
+  @OneToMany(() => InventoryEntity, (inventory) => inventory.products_type)
+  inventory: InventoryEntity[];
 }

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "83084a06-8d2d-4916-b963-8c0e2a891831",
+		"_postman_id": "fa1055df-64ec-4f8b-9edc-924c52fdb955",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27054020"
+		"_exporter_id": "26386580"
 	},
 	"item": [
 		{
@@ -12,6 +12,16 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -20,11 +30,13 @@
 								{
 									"key": "email",
 									"value": "doanthanhluc91bvh@gmail.com",
+									"description": "require",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "a",
+									"description": "require",
 									"type": "text"
 								}
 							]
@@ -50,6 +62,16 @@
 				{
 					"name": "register",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -58,16 +80,19 @@
 								{
 									"key": "email",
 									"value": "doanthanhluc91bvh@gmail.com",
+									"description": "require",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "a",
+									"description": "require",
 									"type": "text"
 								},
 								{
 									"key": "name",
 									"value": "ddasdsa",
+									"description": "require",
 									"type": "text"
 								}
 							]
@@ -102,7 +127,8 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "doanthanhluc91bvh@gmail.com"
+									"value": "doanthanhluc91bvh@gmail.com",
+									"description": "require"
 								}
 							]
 						}
@@ -115,7 +141,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/user/very-code?email=doanthanhluc91bvh@gmail.com&code=603660",
+							"raw": "{{baseURL}}/user/very-code?email=doanthanhluc91bvh@gmail.com&code=390106",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -126,11 +152,13 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "doanthanhluc91bvh@gmail.com"
+									"value": "doanthanhluc91bvh@gmail.com",
+									"description": "require"
 								},
 								{
 									"key": "code",
-									"value": "603660"
+									"value": "390106",
+									"description": "require"
 								}
 							]
 						}
@@ -184,14 +212,18 @@
 				{
 					"name": "userProfile",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvYW50aGFuaGx1YzkxYnZoQGdtYWlsLmNvbSIsImlkIjoiYTM2YmY2OGQtMzdmOS00Y2U3LWJhNmEtN2ZjZDhhZGI3YzY5IiwibmFtZSI6ImRkYXNkc2EiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY4MzYzMjI3MiwiZXhwIjoxNjgzNzE4NjcyfQ.oVoYXWGU6uhSO3VUxB3iSEAc3M22hHLutZU7-2s7pFQ",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/user/info",
 							"host": [
@@ -229,29 +261,37 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
+									"key": "name",
+									"value": "Áo carton",
+									"description": "require",
+									"type": "text"
+								},
+								{
 									"key": "sku",
-									"value": "16",
+									"value": "NO003",
+									"description": "require",
 									"type": "text"
 								},
 								{
-									"key": "size",
-									"value": "X",
+									"key": "description",
+									"value": "mô tả",
 									"type": "text"
 								},
 								{
-									"key": "color",
-									"value": "dasdsa",
+									"key": "note",
+									"value": "ghi chú",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/products-type",
+							"raw": "{{baseURL}}/products-type/",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"products-type"
+								"products-type",
+								""
 							]
 						}
 					},
@@ -296,42 +336,6 @@
 					"response": []
 				},
 				{
-					"name": "[ADMIN] create-products-type Copy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"note\": \"dasdsadasdasdas\",\r\n    \"name\": \"áo thun\",\r\n    \"color\": \"dasdsa\",\r\n    \"sku\": \"asdfa\",\r\n    \"size\": \"X\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/products-type",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"products-type"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get-one-products-type",
 					"request": {
 						"auth": {
@@ -347,13 +351,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/0a30447e-301e-4c4e-8183-8a86e919e456",
+							"raw": "{{baseURL}}/products-type/0cf791b1-0e93-4043-8597-99d3419af4c1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"0a30447e-301e-4c4e-8183-8a86e919e456"
+								"0cf791b1-0e93-4043-8597-99d3419af4c1"
 							]
 						}
 					},
@@ -375,13 +379,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/products-type/001fa5ae-bb42-458a-9522-c8ce7576ba7c",
+							"raw": "{{baseURL}}/products-type/a927f434-eb8f-4b5f-97b7-6c5ae3a0da56",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"001fa5ae-bb42-458a-9522-c8ce7576ba7c"
+								"a927f434-eb8f-4b5f-97b7-6c5ae3a0da56"
 							]
 						}
 					},
@@ -406,25 +410,30 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "sku",
-									"value": "dsasd",
+									"key": "name",
+									"value": "tên",
 									"type": "text"
 								},
 								{
-									"key": "color",
-									"value": "đỏ",
+									"key": "note",
+									"value": "ghi chú",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "thông tin",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/products-type/d8b3fe9e-b8af-4131-ba54-9c6e2c506d62",
+							"raw": "{{baseURL}}/products-type/0cf791b1-0e93-4043-8597-99d3419af4c1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"products-type",
-								"d8b3fe9e-b8af-4131-ba54-9c6e2c506d62"
+								"0cf791b1-0e93-4043-8597-99d3419af4c1"
 							]
 						}
 					},
@@ -433,82 +442,83 @@
 			]
 		},
 		{
-			"name": "receive",
+			"name": "supplier",
 			"item": [
 				{
-					"name": "[ADMIN] create-receive",
+					"name": "[ADMIN] create-supplier",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "name",
+								"value": "ông Tuấn",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "quantity",
-									"value": "1",
+									"key": "supplier_code",
+									"value": "NO001",
+									"description": "reuqire",
 									"type": "text"
 								},
 								{
-									"key": "fee_shipping",
-									"value": "100000",
+									"key": "name",
+									"value": "ông tuấn",
+									"description": "reuqire",
 									"type": "text"
 								},
 								{
-									"key": "total_price",
-									"value": "1231",
+									"key": "address",
+									"value": "quận 12",
+									"description": "reuqire",
 									"type": "text"
 								},
 								{
-									"key": "sku",
-									"value": "7",
+									"key": "phone_number",
+									"value": "0969158487",
+									"description": "reuqire",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "mô tả",
 									"type": "text"
 								},
 								{
 									"key": "note",
-									"value": "dasdasdasdaddasdsa",
+									"value": "ghi chú",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/receive",
+							"raw": "{{baseURL}}/supplier",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"receive"
-							],
-							"query": [
-								{
-									"key": "quantity",
-									"value": null,
-									"disabled": true
-								}
+								"supplier"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": " [ADMIN] get-one-receive",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseURL}}/receive/dde419a9-341c-4a18-8019-66d1e48e9683",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"receive",
-								"dde419a9-341c-4a18-8019-66d1e48e9683"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[ADMIN] get-all-receives",
+					"name": "[ADMIN] get-all-supplier",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -523,12 +533,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/receive?pageIndex=0&pageSize=10",
+							"raw": "{{baseURL}}/supplier?pageIndex=0&pageSize=10",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"receive"
+								"supplier"
 							],
 							"query": [
 								{
@@ -545,7 +555,35 @@
 					"response": []
 				},
 				{
-					"name": "[ADMIN] update-receive",
+					"name": "[ADMIN] get-one-supplier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supplier/db9a5aa3-314b-40cb-86a1-b6b36c6fb4f3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supplier",
+								"db9a5aa3-314b-40cb-86a1-b6b36c6fb4f3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] update-supplier",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -563,40 +601,355 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "quantity",
-									"value": "3123213",
+									"key": "name",
+									"value": "tên nhà cung cấp",
 									"type": "text"
 								},
 								{
-									"key": "fee_shipping",
-									"value": "31312",
+									"key": "address",
+									"value": "địa chỉ",
 									"type": "text"
 								},
 								{
-									"key": "total_price",
-									"value": "3123",
-									"type": "text"
-								},
-								{
-									"key": "sku",
-									"value": "dsasd",
+									"key": "phone_number",
+									"value": "09609874559",
 									"type": "text"
 								},
 								{
 									"key": "note",
-									"value": "dasdsadadas",
+									"value": "ghi chú",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "mô tả",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/receive/dde419a9-341c-4a18-8019-66d1e48e9683",
+							"raw": "{{baseURL}}/supplier/5be3ee66-b51c-4934-89c3-24c57ce2971f",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"receive",
-								"dde419a9-341c-4a18-8019-66d1e48e9683"
+								"supplier",
+								"5be3ee66-b51c-4934-89c3-24c57ce2971f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] remove-supllier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supplier/5be3ee66-b51c-4934-89c3-24c57ce2971f",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supplier",
+								"5be3ee66-b51c-4934-89c3-24c57ce2971f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "import-products",
+			"item": [
+				{
+					"name": "order",
+					"item": [
+						{
+							"name": "[ADMIN] create-import-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "supplier_code",
+											"value": "NO21656",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}/import-products-order",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-all-import-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-order",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-one-import-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-order/6a8f8dae-1d73-4ba9-8d76-9a1d66d75842",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-order",
+										"6a8f8dae-1d73-4ba9-8d76-9a1d66d75842"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] create-payment-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"import_product_order_id\": \"7a817829-9113-4dd5-8273-baea03aeb36e\", //require\r\n    \"fee_ship\": 10, //require\r\n    \"down_price\": 1068, //require\r\n    \"payment_success\": 13017 //require\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/import-products-order/payment-order",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-order",
+										"payment-order"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"item": [
+						{
+							"name": "[ADMIN] create-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"sku\": \"NO002\", //require\r\n    \"size\": \"M\", //require\r\n    \"color\": \"blue\", //require\r\n    \"price\": 10, //require\r\n    \"quantity\": 100, //require\r\n    \"import_product_order_id\": \"7a817829-9113-4dd5-8273-baea03aeb36e\", //require\r\n    \"down_price\": 0,\r\n    \"note\": \"ghi chú\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-one-import-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail/25f778e4-619d-4005-a375-b647e84b2640",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail",
+										"25f778e4-619d-4005-a375-b647e84b2640"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] remove-import-products-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/import-products-detail/95ed7bb4-33d3-44c6-90ab-4a32be3e8506",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"import-products-detail",
+										"95ed7bb4-33d3-44c6-90ab-4a32be3e8506"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "inventory",
+			"item": [
+				{
+					"name": "get-one-inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/inventory/11764936-a83a-437b-a6b8-20922bde9975",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"inventory",
+								"11764936-a83a-437b-a6b8-20922bde9975"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/inventory/?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"inventory",
+								""
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},

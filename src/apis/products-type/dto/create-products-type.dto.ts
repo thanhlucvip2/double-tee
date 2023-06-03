@@ -1,19 +1,13 @@
-import { IS_ALPHA, IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateProductsTypeDto {
   @IsNotEmpty()
-  @Length(1, 20)
+  name: string;
+
+  @IsNotEmpty()
   sku: string;
 
-  @IsNotEmpty()
-  @Length(1, 5)
-  size: string;
-
-  @IsNotEmpty()
-  color: string;
-
-  @IsNotEmpty()
-  name: string;
+  description?: string;
 
   note?: string;
 }

@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       autoLoadEntities: true,
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      logging: MYSQL_LOGGING,
+      logging: false,
     }),
   ],
 })

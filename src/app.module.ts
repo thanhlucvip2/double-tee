@@ -6,7 +6,10 @@ import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/systems/http-error.filter';
 import { UserModule } from '@/user/user.module';
 import { ProductsTypeModule } from '@/apis/products-type/products-type.module';
-import { ReceiveModule } from '@/apis/receive/receive.module';
+import { SupplierModule } from './apis/supplier/supplier.module';
+import { ImportProductsOrderModule } from './apis/import-products/import-products-order/import-products-order.module';
+import { ImportProductsDetailModule } from './apis/import-products/import-products-detail/import-products-detail.module';
+import { InventoryModule } from './apis/inventory/inventory.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -18,7 +21,10 @@ import { ReceiveModule } from '@/apis/receive/receive.module';
     }),
     UserModule,
     ProductsTypeModule,
-    ReceiveModule,
+    SupplierModule,
+    ImportProductsOrderModule,
+    ImportProductsDetailModule,
+    InventoryModule,
   ],
   providers: [
     {
