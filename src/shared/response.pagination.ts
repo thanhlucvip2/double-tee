@@ -2,21 +2,21 @@ export class ResponsePagination<T> {
   pageIndex: number;
   pageSize: number;
   total: number;
-  items: T[];
+  data: T[];
   constructor({
     pageIndex,
     pageSize,
     total,
-    items,
+    data,
   }: {
     pageIndex: number;
     pageSize: number;
     total: number;
-    items: T[];
+    data: T[];
   }) {
     this.pageIndex = pageIndex;
     this.pageSize = pageSize;
     this.total = total;
-    this.items = items;
+    this.data = data;
   }
 }

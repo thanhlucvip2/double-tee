@@ -72,7 +72,7 @@ export class ImportProductsDetailService {
 
     await this.importProductsDetailRepository.save(importProductsDetail);
 
-    // TODO : pagination
+    // TODO : queryBuilder
     const queryBuilder = this.entityManager
       .createQueryBuilder(ImportProductsDetailEntity, 'import_products_detail')
       .select('SUM(import_products_detail.total_price)', 'total_price')

@@ -202,16 +202,6 @@ export class UserService {
   }
 
   async getAllUser(pagination: PaginationDto) {
-    // const user = await this.userRepository.find();
-    // const allUser = user.map((item) => ({
-    //   email: item.email,
-    //   id: item.id,
-    //   name: item.name,
-    //   createAt: item.createAt,
-    //   updateAt: item.updateAt,
-    //   userStatus: item.userStatus,
-    // }));
-    // return allUser;
     const {
       // fromDate = new Date(),
       // toDate = new Date(),
@@ -219,24 +209,16 @@ export class UserService {
       pageSize = 10,
     } = pagination;
 
-    // const sqlFromDate = convertDateTimeToDateString(fromDate);
-    // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
-   // TODO : pagination
-    const queryBuilder = await this.entityManager
-      .createQueryBuilder(UserEntity, 'user')
-      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
-      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
-      .orderBy({ 'user.createAt': 'ASC' })
-      .limit(pageSize)
-      .offset(pageIndex * pageSize);
+    const [user, userCount] = await this.userRepository.findAndCount({
+      skip: pageIndex * pageSize,
+      take: pageSize,
+    });
 
-    const total = await queryBuilder.getCount();
-    const items = await queryBuilder.getMany();
     const result = new ResponsePagination<UserEntity>({
       pageIndex,
       pageSize,
-      total,
-      items,
+      total: userCount,
+      data: user,
     });
 
     return result;

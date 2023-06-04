@@ -54,22 +54,18 @@ export class ImportProductsOrderService {
 
     // const sqlFromDate = convertDateTimeToDateString(fromDate);
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
-   // TODO : pagination
-    const queryBuilder = await this.entityManager
-      .createQueryBuilder(ImportProductsOrderEntity, 'import_products_order')
-      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
-      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
-      .orderBy({ 'import_products_order.createAt': 'ASC' })
-      .limit(pageSize)
-      .offset(pageIndex * pageSize);
 
-    const total = await queryBuilder.getCount();
-    const items = await queryBuilder.getMany();
+    const [importProductsOrder, importProductsOrderCount] =
+      await this.importProductsOrderRepository.findAndCount({
+        skip: pageIndex * pageSize,
+        take: pageSize,
+      });
+
     const result = new ResponsePagination<ImportProductsOrderEntity>({
       pageIndex: +pageIndex,
       pageSize: +pageSize,
-      total,
-      items,
+      total: importProductsOrderCount,
+      data: importProductsOrder,
     });
     return result;
   }

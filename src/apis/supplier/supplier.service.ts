@@ -54,10 +54,20 @@ export class SupplierService {
   }
 
   async findAll(pagination: PaginationDto) {
-    // TODO : pagination
     const { pageIndex = 0, pageSize = 10 } = pagination;
+    const [supplier, supplierCount] =
+      await this.supplierRepository.findAndCount({
+        skip: pageIndex * pageSize,
+        take: pageSize,
+      });
 
-    return 'result';
+    const result = new ResponsePagination<SupplierEntity>({
+      pageIndex: +pageIndex,
+      pageSize: +pageSize,
+      total: supplierCount,
+      data: supplier,
+    });
+    return result;
   }
 
   async findOne(id: string) {

@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-//TODO : kiểm tra xem người dùng đã đăng nhập chưa để cho phép requests hay không
+/**
+ * kiểm tra xem người dùng đã đăng nhập chưa để cho phép requests hay không
+ */
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 @Injectable()

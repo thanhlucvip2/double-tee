@@ -1,6 +1,10 @@
 import { HTTP_STATUS_MESSAGE } from '@/constants/http_status_message';
 import { HttpStatus } from '@nestjs/common';
-//TODO : tạo bản ghi đè HttpException
+
+/**
+ * tạo bản ghi đè HttpException
+ */
+
 import {
   ArgumentsHost,
   Catch,

@@ -47,22 +47,18 @@ export class ProductsTypeService {
 
     // const sqlFromDate = convertDateTimeToDateString(fromDate);
     // const sqlToDate = convertDateTimeToDateString(adddate(toDate, 1)); // tặng thêm 1 ngày cho date hiện tại
-   // TODO : pagination
-    const queryBuilder = await this.entityManager
-      .createQueryBuilder(ProductsTypeEntity, 'products_type')
-      // .andWhere('receive.created >= :sqlFromDate', { sqlFromDate })
-      // .andWhere('receive.created <= :sqlToDate', { sqlToDate })
-      .orderBy({ 'products_type.createAt': 'ASC' })
-      .limit(pageSize)
-      .offset(pageIndex * pageSize);
 
-    const total = await queryBuilder.getCount();
-    const items = await queryBuilder.getMany();
+    const [productsType, productsTypeCount] =
+      await this.productTypeRepository.findAndCount({
+        skip: pageIndex * pageSize,
+        take: pageSize,
+      });
+
     const result = new ResponsePagination<ProductsTypeEntity>({
       pageIndex: +pageIndex,
       pageSize: +pageSize,
-      total,
-      items,
+      total: productsTypeCount,
+      data: productsType,
     });
     return result;
   }
