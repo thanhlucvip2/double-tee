@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/systems/base.entity';
 import { ROLE } from '@/constants/constants_role';
-import { USER_STATUS } from '@/constants/constants_user-status';
+import { USER_STATUS } from '@/constants/user-status';
 import { Entity, Column } from 'typeorm';
 
 @Entity({ name: 'tb_user' })
