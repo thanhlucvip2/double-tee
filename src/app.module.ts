@@ -30,9 +30,9 @@ import { CustomerModule } from './apis/customer/customer.module';
     ImportProductsOrderModule,
     ImportProductsDetailModule,
     InventoryModule,
+    CustomerModule,
     ExportProductsOrderModule,
     ExportProductsDetailModule,
-    CustomerModule,
   ],
   providers: [
     {

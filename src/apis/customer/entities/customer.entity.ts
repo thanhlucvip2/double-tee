@@ -1,5 +1,6 @@
+import { ExportProductsOrderEntity } from '@/apis/export-products/export-products-order/entities/export-products-order.entity';
 import { BaseEntity } from '@/systems/base.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('tb_customer')
 export class CustomerEntity extends BaseEntity {
@@ -17,4 +18,10 @@ export class CustomerEntity extends BaseEntity {
 
   @Column({ type: 'varchar', unique: true })
   phone_number: string;
+
+  @OneToMany(
+    () => ExportProductsOrderEntity,
+    (export_order) => export_order.customer,
+  )
+  export_product_order: ExportProductsOrderEntity[];
 }
