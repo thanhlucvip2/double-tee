@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 import { BaseEntity } from '@/systems/base.entity';
 import { CustomerEntity } from '@/apis/customer/entities/customer.entity';

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4bdf688-e0b6-4703-bee6-2bc033907a79",
+		"_postman_id": "4ef91d3c-a9b4-496b-b91b-78a3ebc4af5f",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26386580"
@@ -1098,6 +1098,53 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "export-products",
+			"item": [
+				{
+					"name": "order",
+					"item": [
+						{
+							"name": "[ADMIN] create-export-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "customer_code",
+											"value": "string;",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}/export-products-order",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"export-products-order"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

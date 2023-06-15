@@ -1,7 +1,10 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ExportProductsOrderService } from './export-products-order.service';
 import { CreateExportProductsOrderDto } from './dto/create-export-products-order.dto';
+import { AuthGuard } from '@/guard/auth.guard';
+import { AdminRoleGuard } from '@/guard/admin_role.guard';
 
+@UseGuards(AuthGuard, AdminRoleGuard)
 @Controller('export-products-order')
 export class ExportProductsOrderController {
   constructor(
