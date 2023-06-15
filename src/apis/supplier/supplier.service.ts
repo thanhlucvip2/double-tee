@@ -112,20 +112,19 @@ export class SupplierService {
   }
 
   async remove(id: string) {
-    const receive: SupplierEntity = await this.supplierRepository.findOne({
-      where: { id },
-    });
-
-    if (!receive) {
-      throw new HttpException(
-        'Nhà cung cấp không tồn tại trong hệ thống',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-    await this.supplierRepository.delete({ id });
-
-    return {
-      message: 'Xóa nhà cung cấp thành công',
-    };
+    // TODO : chưa xóa được
+    // const receive: SupplierEntity = await this.supplierRepository.findOne({
+    //   where: { id },
+    // });
+    // if (!receive) {
+    //   throw new HttpException(
+    //     'Nhà cung cấp không tồn tại trong hệ thống',
+    //     HttpStatus.BAD_REQUEST,
+    //   );
+    // }
+    // await this.supplierRepository.delete({ id });
+    // return {
+    //   message: 'Xóa nhà cung cấp thành công',
+    // };
   }
 }

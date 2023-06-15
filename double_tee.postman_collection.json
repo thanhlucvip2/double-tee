@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fa1055df-64ec-4f8b-9edc-924c52fdb955",
+		"_postman_id": "d4bdf688-e0b6-4703-bee6-2bc033907a79",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26386580"
@@ -950,6 +950,150 @@
 									"key": "pageSize",
 									"value": "10"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "[ADMIN] create-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"string;\",\r\n    \"address\": \"string;\",\r\n    \"customer_code\": \"stridasdng;\",\r\n    \"phone_number\": \"string;\",\r\n    \"description\": \"string;\",\r\n    \"note\": \"string;\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/customer",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] get-all-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/customer/?pageSize=10&pageIndex=0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"customer",
+								""
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] get-one-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/customer/3ba7b7aa-8c6c-4a30-be99-98e5e281b6ea",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"customer",
+								"3ba7b7aa-8c6c-4a30-be99-98e5e281b6ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] update-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"stridasdng;\",\r\n    \"address\": \"strasdasding;\",\r\n    \"phone_number\": \"strdasding;\",\r\n    \"description\": \"strasdasdasing;\",\r\n    \"note\": \"strdasdasdasding;\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/customer/3ba7b7aa-8c6c-4a30-be99-98e5e281b6ea",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"customer",
+								"3ba7b7aa-8c6c-4a30-be99-98e5e281b6ea"
 							]
 						}
 					},

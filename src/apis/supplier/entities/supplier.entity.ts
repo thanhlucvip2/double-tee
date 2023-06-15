@@ -19,6 +19,9 @@ export class SupplierEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true })
   description: string;
 
-  @OneToMany(() => ImportProductsOrderEntity, (receive) => receive.supplier)
+  @OneToMany(
+    () => ImportProductsOrderEntity,
+    (import_order) => import_order.supplier,
+  )
   import_product_order: ImportProductsOrderEntity[];
 }

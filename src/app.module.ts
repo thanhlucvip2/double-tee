@@ -14,6 +14,7 @@ import { ImportProductsDetailModule } from '@/apis/import-products/import-produc
 import { InventoryModule } from '@/apis/inventory/inventory.module';
 import { ExportProductsOrderModule } from '@/apis/export-products/export-products-order/export-products-order.module';
 import { ExportProductsDetailModule } from '@/apis/export-products/export-products-detail/export-products-detail.module';
+import { CustomerModule } from './apis/customer/customer.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -31,6 +32,7 @@ import { ExportProductsDetailModule } from '@/apis/export-products/export-produc
     InventoryModule,
     ExportProductsOrderModule,
     ExportProductsDetailModule,
+    CustomerModule,
   ],
   providers: [
     {
