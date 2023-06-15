@@ -15,31 +15,27 @@ import { PaginationDto } from '@/shared/pagination.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { AuthGuard } from '@/guard/auth.guard';
 import { AdminRoleGuard } from '@/guard/admin_role.guard';
-
+@UseGuards(AuthGuard, AdminRoleGuard)
 @Controller('customer')
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post()
-  @UseGuards(AuthGuard, AdminRoleGuard)
   async create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customerService.create(createCustomerDto);
   }
 
   @Get()
-  @UseGuards(AuthGuard, AdminRoleGuard)
   findAll(@Query() pagination: PaginationDto) {
     return this.customerService.findAll(pagination);
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard, AdminRoleGuard)
   findOne(@Param('id') id: string) {
     return this.customerService.findOne(id);
   }
 
   @Put(':id')
-  @UseGuards(AuthGuard, AdminRoleGuard)
   update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,

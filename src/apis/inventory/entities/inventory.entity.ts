@@ -17,10 +17,6 @@ export class InventoryEntity extends BaseEntity {
   @Column({ type: 'int', nullable: false })
   quantity: number;
 
-  @ManyToOne(
-    () => ProductsTypeEntity,
-    (products_type) => products_type.inventory,
-  )
   @Column({
     type: 'varchar',
     default: INVENTORY_STATUS.ACTIVE,
@@ -28,6 +24,10 @@ export class InventoryEntity extends BaseEntity {
   })
   status: string;
 
+  @ManyToOne(
+    () => ProductsTypeEntity,
+    (products_type) => products_type.inventory,
+  )
   @JoinColumn({
     name: 'sku',
     referencedColumnName: 'sku',
