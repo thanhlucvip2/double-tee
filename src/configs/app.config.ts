@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "dotenv/config";
 // Server
 export const PORT = process.env.PORT || 5000;
 

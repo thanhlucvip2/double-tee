@@ -1,5 +1,5 @@
 export class UpdateProductsTypeDto {
-  name?: string;
-  description?: string;
-  note?: string;
+	name?: string;
+	description?: string;
+	note?: string;
 }

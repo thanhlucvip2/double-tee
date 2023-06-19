@@ -1,14 +1,14 @@
-import { Type } from 'class-transformer';
-import { IsDate } from 'class-validator';
+import { Type } from "class-transformer";
+import { IsDate } from "class-validator";
 export class PaginationDto {
-  // @Type(() => Date)
-  // @IsDate()
-  // fromDate?: Date;
+	// @Type(() => Date)
+	// @IsDate()
+	// fromDate?: Date;
 
-  // @Type(() => Date)
-  // @IsDate()
-  // toDate?: Date;
+	// @Type(() => Date)
+	// @IsDate()
+	// toDate?: Date;
 
-  pageIndex?: number;
-  pageSize?: number;
+	pageIndex?: number;
+	pageSize?: number;
 }

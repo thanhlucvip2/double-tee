@@ -1,13 +1,13 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from "class-validator";
 
 export class CreateProductsTypeDto {
-  @IsNotEmpty()
-  name: string;
+	@IsNotEmpty()
+	name: string;
 
-  @IsNotEmpty()
-  sku: string;
+	@IsNotEmpty()
+	sku: string;
 
-  description?: string;
+	description?: string;
 
-  note?: string;
+	note?: string;
 }

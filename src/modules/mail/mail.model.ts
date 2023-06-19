@@ -1,4 +1,4 @@
 export interface MailModel {
-  toEmail: string;
-  description: any;
+	toEmail: string;
+	description: any;
 }

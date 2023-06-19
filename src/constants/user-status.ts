@@ -1,4 +1,4 @@
 export const USER_STATUS = {
-  ACTIVE: 'ACTIVE',
-  CREATE: 'CREATE',
+	ACTIVE: "ACTIVE",
+	CREATE: "CREATE",
 };

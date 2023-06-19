@@ -73,7 +73,7 @@ export class ExportProductsOrderService {
 		const exportProductsOrder =
 			await this.exportProductsOrderRepository.findOne({
 				where: { id },
-				relations: ["customer"],
+				relations: ["customer", "export_product_detail"],
 			});
 		if (!exportProductsOrder) {
 			throw new HttpException(

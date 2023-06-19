@@ -1,21 +1,21 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
-  Column,
-} from 'typeorm';
+	Entity,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+	CreateDateColumn,
+	Column,
+} from "typeorm";
 @Entity()
 export class BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-  @UpdateDateColumn()
-  updateAt: Date;
+	@UpdateDateColumn()
+	updateAt: Date;
 
-  @CreateDateColumn()
-  createAt: Date;
+	@CreateDateColumn()
+	createAt: Date;
 
-  @Column({ type: 'text', nullable: true })
-  note: string;
+	@Column({ type: "text", nullable: true })
+	note: string;
 }

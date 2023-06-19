@@ -1,19 +1,19 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty, Length } from "class-validator";
 
 export class CreateSupplierDto {
-  @IsNotEmpty()
-  supplier_code: string;
+	@IsNotEmpty()
+	supplier_code: string;
 
-  @IsNotEmpty()
-  name: string;
+	@IsNotEmpty()
+	name: string;
 
-  @IsNotEmpty()
-  address: string;
+	@IsNotEmpty()
+	address: string;
 
-  @IsNotEmpty()
-  @Length(8, 11)
-  phone_number: string;
+	@IsNotEmpty()
+	@Length(8, 11)
+	phone_number: string;
 
-  description?: string;
-  note?: string;
+	description?: string;
+	note?: string;
 }
