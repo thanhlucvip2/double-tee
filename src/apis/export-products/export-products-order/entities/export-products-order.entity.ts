@@ -6,7 +6,7 @@ import { EXPORT_PRODUCTS_ORDER } from '@/constants/export_products_order';
 
 @Entity('tb_export_product_order')
 export class ExportProductsOrderEntity extends BaseEntity {
-  @Column({ type: 'varchar', nullable: false, unique: true })
+  @Column({ type: 'varchar', nullable: false })
   customer_code: string;
 
   // tổng tiền

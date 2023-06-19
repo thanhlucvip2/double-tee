@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateImportProductsOrderDto } from './dto/create-import-products-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ImportProductsOrderEntity } from './entities/import-products-order.entity';
-import { EntityManager, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { SupplierEntity } from '@/apis/supplier/entities/supplier.entity';
 import { PaginationDto } from '@/shared/pagination.dto';
 import { ResponsePagination } from '@/shared/response.pagination';
@@ -17,9 +17,8 @@ export class ImportProductsOrderService {
     private readonly importProductsOrderRepository: Repository<ImportProductsOrderEntity>,
     @InjectRepository(SupplierEntity)
     private readonly supplierRepository: Repository<SupplierEntity>,
-    private entityManager: EntityManager,
     private readonly inventoryService: InventoryService,
-  ) {}
+  ) { }
 
   async create({ supplier_code, note }: CreateImportProductsOrderDto) {
     const supplierData = await this.supplierRepository.findOne({
