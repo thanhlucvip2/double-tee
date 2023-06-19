@@ -1,47 +1,55 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
-import { BaseEntity } from '@/systems/base.entity';
-import { CustomerEntity } from '@/apis/customer/entities/customer.entity';
-import { EXPORT_PRODUCTS_ORDER } from '@/constants/export_products_order';
+import { BaseEntity } from "@/systems/base.entity";
+import { CustomerEntity } from "@/apis/customer/entities/customer.entity";
+import { EXPORT_PRODUCTS_ORDER } from "@/constants/export_products_order";
+import { ExportProductsDetailEntity } from "../../export-products-detail/entities/export-products-detail.entity";
 
-@Entity('tb_export_product_order')
+@Entity("tb_export_product_order")
 export class ExportProductsOrderEntity extends BaseEntity {
-  @Column({ type: 'varchar', nullable: false })
-  customer_code: string;
+	@Column({ type: "varchar", nullable: false })
+	customer_code: string;
 
-  // tổng tiền
-  @Column({ type: 'int', nullable: true, default: 0 })
-  total_price: number;
+	// tổng tiền
+	@Column({ type: "int", nullable: true, default: 0 })
+	total_price: number;
 
-  // phí ship
-  @Column({ type: 'int', nullable: true, default: 0 })
-  fee_ship: number;
+	// phí ship
+	@Column({ type: "int", nullable: true, default: 0 })
+	fee_ship: number;
 
-  // giá giảm
-  @Column({ type: 'int', nullable: true, default: 0 })
-  down_price: number;
+	// giá giảm
+	@Column({ type: "int", nullable: true, default: 0 })
+	down_price: number;
 
-  // công nợ
-  @Column({ type: 'int', nullable: true, default: 0 })
-  debt: number;
+	// công nợ
+	@Column({ type: "int", nullable: true, default: 0 })
+	debt: number;
 
-  // số tiền đã thanh toán
-  @Column({ type: 'int', nullable: true, default: 0 })
-  payment_success: number;
+	// số tiền đã thanh toán
+	@Column({ type: "int", nullable: true, default: 0 })
+	payment_success: number;
 
-  // số tiền cần thanh toán còn lại
-  @Column({ type: 'int', nullable: true, default: 0 })
-  total_price_payment: number;
+	// số tiền cần thanh toán còn lại
+	@Column({ type: "int", nullable: true, default: 0 })
+	total_price_payment: number;
 
-  // trạng thái
-  @Column({
-    type: 'varchar',
-    nullable: true,
-    default: EXPORT_PRODUCTS_ORDER.CREATE,
-  })
-  status: string;
+	// trạng thái
+	@Column({
+		type: "varchar",
+		nullable: true,
+		default: EXPORT_PRODUCTS_ORDER.CREATE,
+	})
+	status: string;
 
-  // khách hàng
-  @ManyToOne(() => CustomerEntity, (customer) => customer.export_product_order)
-  customer: CustomerEntity;
+	// khách hàng
+	@ManyToOne(() => CustomerEntity, customer => customer.export_product_order)
+	customer: CustomerEntity;
+
+	// danh sách chi tiết đơn xuất hàng
+	@OneToMany(
+		() => ExportProductsDetailEntity,
+		import_products_detail => import_products_detail.export_product_order,
+	)
+	export_product_detail: ExportProductsDetailEntity[];
 }
