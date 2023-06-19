@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4ef91d3c-a9b4-496b-b91b-78a3ebc4af5f",
+		"_postman_id": "34e30275-ad00-4e5b-a83e-29463fb798f5",
 		"name": "double_tee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26386580"
@@ -1127,7 +1127,7 @@
 									"urlencoded": [
 										{
 											"key": "customer_code",
-											"value": "string;",
+											"value": "NO001",
 											"type": "text"
 										}
 									]
@@ -1139,6 +1139,61 @@
 									],
 									"path": [
 										"export-products-order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-all-export-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/export-products-order",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"export-products-order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ADMIN] get-one-export-products-order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/export-products-order/7444f2db-ea79-4f33-ab83-500c2c03db59",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"export-products-order",
+										"7444f2db-ea79-4f33-ab83-500c2c03db59"
 									]
 								}
 							},
