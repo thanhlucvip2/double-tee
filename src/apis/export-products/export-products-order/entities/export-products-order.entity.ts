@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
 import { BaseEntity } from "@/systems/base.entity";
 import { CustomerEntity } from "@/apis/customer/entities/customer.entity";
-import { EXPORT_PRODUCTS_ORDER } from "@/constants/export_products_order";
+import { EXPORT_PRODUCTS_ORDER } from "@/utils/constants/export_products_order";
 import { ExportProductsDetailEntity } from "../../export-products-detail/entities/export-products-detail.entity";
 
 @Entity("tb_export_product_order")

@@ -7,7 +7,7 @@ import { SupplierEntity } from "@/apis/supplier/entities/supplier.entity";
 import { PaginationDto } from "@/shared/pagination.dto";
 import { ResponsePagination } from "@/shared/response.pagination";
 import { PaymentOrderDto } from "./dto/payment-import-products-order.dto";
-import { IMPORT_PRODUCTS_ORDER } from "@/constants/import_products_order";
+import { IMPORT_PRODUCTS_ORDER } from "@/utils/constants/import_products_order";
 import { InventoryService } from "@/apis/inventory/inventory.service";
 
 @Injectable()

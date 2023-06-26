@@ -1,5 +1,5 @@
 import { SupplierEntity } from "@/apis/supplier/entities/supplier.entity";
-import { IMPORT_PRODUCTS_ORDER } from "@/constants/import_products_order";
+import { IMPORT_PRODUCTS_ORDER } from "@/utils/constants/import_products_order";
 import { BaseEntity } from "@/systems/base.entity";
 import { Entity, Column, ManyToOne, OneToMany } from "typeorm";
 import { ImportProductsDetailEntity } from "../../import-products-detail/entities/import-products-detail.entity";

@@ -1,4 +1,4 @@
-import { ROLE } from "@/constants/constants_role";
+import { ROLE } from "@/utils/constants/constants_role";
 import {
 	Injectable,
 	CanActivate,

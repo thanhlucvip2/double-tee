@@ -1,4 +1,4 @@
-import { HTTP_STATUS_MESSAGE } from "@/constants/http_status_message";
+import { HTTP_STATUS_MESSAGE } from "@/utils/constants/http_status_message";
 import { HttpStatus } from "@nestjs/common";
 
 /**

@@ -5,7 +5,7 @@ import { ImportProductsDetailEntity } from "./entities/import-products-detail.en
 import { EntityManager, Repository } from "typeorm";
 import { ProductsTypeEntity } from "@/apis/products-type/entities/products-type.entity";
 import { ImportProductsOrderEntity } from "../import-products-order/entities/import-products-order.entity";
-import { IMPORT_PRODUCTS_ORDER } from "@/constants/import_products_order";
+import { IMPORT_PRODUCTS_ORDER } from "@/utils/constants/import_products_order";
 
 @Injectable()
 export class ImportProductsDetailService {

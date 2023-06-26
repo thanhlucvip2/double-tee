@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { ProductsTypeEntity } from "@/apis/products-type/entities/products-type.entity";
 import { BaseEntity } from "@/systems/base.entity";
-import { INVENTORY_STATUS } from "@/constants/inventory_status";
+import { INVENTORY_STATUS } from "@/utils/constants/inventory_status";
 
 @Entity("tb_inventory")
 export class InventoryEntity extends BaseEntity {
